@@ -1,4 +1,45 @@
-## Create a Linux Virtual Machine
+### Introduction
+
+[![Introduction](https://img.youtube.com/vi/UkXt_e9-SYc/0.jpg)](https://www.youtube.com/watch?v=UkXt_e9-SYc)
+
+### Big Picture: Compute Services
+
+[![Big Picture - Compute Services](https://img.youtube.com/vi/JMbPWOjSCZ8/0.jpg)](https://www.youtube.com/watch?v=JMbPWOjSCZ8)
+
+There are a lot of compute services available through Azure, each with their own use cases. You can check out a good chart for deciding when to use each in the [Microsoft documentation](https://docs.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree?WT.mc_id=udacity_learn-wwl). Some of the available options are:
+
+* Virtual Machines
+* App Services
+* Azure Batch
+* Azure Functions
+* Container Instances
+* Service Fabric
+* Azure Kubernetes Service (AKS)
+
+**Microsoft Learn Resources**
+
+* [Core Cloud Services - Azure compute options](https://docs.microsoft.com/learn/modules/intro-to-azure-compute/?WT.mc_id=udacity_learn-wwl)
+
+### Subscriptions and Resource Groups
+
+[![Subscriptions And Resource Groups](https://img.youtube.com/vi/5LEbboIWNgg/0.jpg)](https://www.youtube.com/watch?v=5LEbboIWNgg)
+
+Azure uses a hierarchical system to keep resources organized and to manage expenses easily.
+
+This starts at the top with your **Azure Account**. The next level down is the **Subscription** level; it's likely in your day-to-day Azure work that you may be working with more than one. For instance, there may be one subscription for development and testing, and another for production systems.
+
+Below the subscription level is where you'll find **Resource Groups**. These help to organize resources you use, such as Virtual Machines and App Services, in order to make resource management easier. You may have a resource group for a specific project, or because resource groups are tied to a **Region**, you may have resource groups containing similar resources in multiple locations across the world. A region contains at least one data center, but could have multiple data centers that are close by and networked together through a low-latency network. There are over 60 regions available worldwide and available in 140 countries, such as East US and Japan West.
+
+![Resource groups can encompass multiple services in a region.](https://video.udacity-data.com/topher/2020/July/5f108911_subscription-resource-group-hierarchy/subscription-resource-group-hierarchy.png)
+
+When choosing a region, it's important to consider what you are trying to achieve. For development and testing purposes, you likely want a region close to yourself; for production purposes, you often want resources to be close to your user. Keep the following in mind:
+
+* Service availability - Some services may not be available in a particular region.
+* Performance - Latency determines network service performance; are you creating resources for yourself or your end user?
+* Cost - Costs of services vary by region. If latency isn’t an issue, you might want to deploy your services in the cheapest region.
+
+
+### Exercise - Create a Linux Virtual Machine
 
 **Prerequisite**: If you're using Windows, you’ll need PowerShell or Bash to connect to the VM with ssh. Windows 10 should already have Powershell installed. If you don't have it already installed, here is a [guide](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7&WT.mc_id=udacity_learn-wwls) on how to install it.
 
