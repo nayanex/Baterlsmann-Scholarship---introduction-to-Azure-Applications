@@ -1,8 +1,8 @@
-### Introduction
+## Introduction
 
 [![Introduction](https://img.youtube.com/vi/UkXt_e9-SYc/0.jpg)](https://www.youtube.com/watch?v=UkXt_e9-SYc)
 
-### Big Picture: Compute Services
+## Big Picture: Compute Services
 
 [![Big Picture - Compute Services](https://img.youtube.com/vi/JMbPWOjSCZ8/0.jpg)](https://www.youtube.com/watch?v=JMbPWOjSCZ8)
 
@@ -20,7 +20,7 @@ There are a lot of compute services available through Azure, each with their own
 
 * [Core Cloud Services - Azure compute options](https://docs.microsoft.com/learn/modules/intro-to-azure-compute/?WT.mc_id=udacity_learn-wwl)
 
-### Subscriptions and Resource Groups
+## Subscriptions and Resource Groups
 
 [![Subscriptions And Resource Groups](https://img.youtube.com/vi/5LEbboIWNgg/0.jpg)](https://www.youtube.com/watch?v=5LEbboIWNgg)
 
@@ -38,8 +38,62 @@ When choosing a region, it's important to consider what you are trying to achiev
 * Performance - Latency determines network service performance; are you creating resources for yourself or your end user?
 * Cost - Costs of services vary by region. If latency isn’t an issue, you might want to deploy your services in the cheapest region.
 
+### Creating a Resource Group in the Azure Portal
 
-### Exercise - Create a Linux Virtual Machine
+[![Walkthrough - Resource Group](https://img.youtube.com/vi/_9nHPP0gixc/0.jpg)](https://www.youtube.com/watch?v=_9nHPP0gixc)
+
+To set up a resource group in the Azure Portal:
+
+* Go to the Azure [Portal homepage](https://portal.azure.com/#home)
+* Click "Create a Resource Group"
+* Search for "Resource group" and click "Create"
+* You'll need to select the subscription for the resource group, name it, and select a region
+* Make sure once you select "Review and create" to actually review the information! While it doesn't take too much time to go back and create a new resource group, you'll want to check for any typos in the name or if the wrong region was selected. When we work out of Azure CLI later, this becomes even more important, as you could cause other scripts to fail if things are named incorrectly or are in an inappropriate region.
+* Click "Create" once you are done reviewing.
+
+### QUIZ
+
+Why is choosing the appropriate region (or deploying to multiple regions) for your resources important?
+
+[x] Some services may only be available in certain regions.
+[x] Some pricing tiers are only available in certain regions.
+[x] Users located closer to the resources will experience less latency.
+[] You should always choose the options closest to you.
+
+### Microsoft Learn Resources
+
+* [Manage resources in Azure](https://docs.microsoft.com/learn/paths/manage-resources-in-azure/?WT.mc_id=udacity_learn-wwl)
+* [Move Azure resources to another resource group](https://docs.microsoft.com/learn/modules/move-azure-resources-another-resource-group/?WT.mc_id=udacity_learn-wwl)
+* [Control and organize Azure resources with Azure Resource Manager](https://docs.microsoft.com/learn/modules/control-and-organize-with-azure-resource-manager/?WT.mc_id=udacity_learn-wwl)
+* [Create ARM templates](https://docs.microsoft.com/learn/modules/build-azure-vm-templates/?WT.mc_id=udacity_learn-wwl)
+
+## Exercise: Create a Resource Group
+
+* Create a Resource Group named **resource-group-west** in [Azure](https://www.portal.azure.com/) in the **West US** region.
+
+Resource Groups are fully covered in the Azure free account.
+
+[![Solution - Subscriptions And Resource Groups](https://img.youtube.com/vi/rmWRvxY0Hh8/0.jpg)](https://www.youtube.com/watch?v=rmWRvxY0Hh8)
+
+### Steps to Create a Resource Group using the Azure CLI:
+
+1. Log in using `az login`.
+2. We'll use the Azure CLI command `az group create` and pass in two flags:
+* resource group `--name`
+* `--location` which is the same as the "region" field on the Azure portal.
+3. If you want to see a list of all locations, you can run `az account list-locations -o table` to output the list in table format.
+4. I want to create my resource group in the West US 2 region:
+
+`az group create --name resource-group-west --location westus2`
+
+The resource group will be created and a JSON response will be returned with the status.
+
+### Azure CLI Documentation
+
+You can reference the [Azure CLI documentation](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest&WT.mc_id=udacity_learn-wwl) for further information on other commands.
+
+
+## Exercise - Create a Linux Virtual Machine
 
 **Prerequisite**: If you're using Windows, you’ll need PowerShell or Bash to connect to the VM with ssh. Windows 10 should already have Powershell installed. If you don't have it already installed, here is a [guide](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7&WT.mc_id=udacity_learn-wwls) on how to install it.
 
