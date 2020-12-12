@@ -420,14 +420,22 @@ server {
 `sudo service nginx restart`
 
 ### Deploying the App to the VM
-This section is the same as the earlier walkthrough, so we'll skip a solution video for it.
+
+This section is the same as the earlier walkthrough.
 
 To deploy the app on the virtual machine, I did the following:
 
-CD to web
-Create venv python3 -m venv venv
-Activate the env source venv/bin/activate
-Upgrade pip in our virtual environment and then Install dependencies—pip install --upgrade pip pip install -r requirements.txt
-We'll run our app python application.py
-In a web browser, we can visit the publicIpaddress
-Type "exit" to disconnect from the VM
+1. CD to `web`
+2. Create `venv python3 -m venv venv`
+3. Activate the env `source venv/bin/activate`
+4. Upgrade pip in our virtual environment and then Install dependencies
+`pip install --upgrade pip pip install -r requirements.txt`
+5. We'll run our app `python application.py`
+6. In a web browser, we can visit the publicIpaddress
+7. Type "exit" to disconnect from the VM
+
+### Cleanup
+
+If we no longer need a resource, we can delete them through the portal. The quickest way to do this from the CLI is to delete the resource group. This will delete all resources in that group
+
+`az group delete -n resource-group-west`
