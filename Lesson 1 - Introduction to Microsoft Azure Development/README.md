@@ -130,3 +130,48 @@ The roots of cloud computing go as far back as the 1960s.
 
 So what’s next? Cloud computing is on the rise in this day and age. As cloud computing continues to become more mainstream, more and more companies are looking to adopt it. Industries such as marketing, education, and healthcare are beginning to increase their use of cloud-based services and platforms.
 
+### Microsoft Learn Resources
+
+[Align requirements with cloud types and service models in Azure](https://docs.microsoft.com/learn/modules/align-requirements-in-azure/?WT.mc_id=udacity_learn-wwl)
+
+[Core Cloud Services - Azure architecture and service guarantees](https://docs.microsoft.com/learn/modules/explore-azure-infrastructure/?WT.mc_id=udacity_learn-wwl)
+
+## The Azure Portal
+
+[![The Azure Portal](https://img.youtube.com/vi/0qb__6Frgn0/0.jpg)](https://www.youtube.com/watch?v=0qb__6Frgn0)
+
+### Practice - The Azure Portal
+
+Make sure you have an Azure account and navigate to the Azure Portal.
+
+* Navigate to the Azure free account page [here](https://azure.microsoft.com/en-us/free/).
+* Click on "Start Free".
+* Complete the account registration.
+* Navigate to the [Azure Portal](https://portal.azure.com/).
+* If there is a box named "Start with an Azure free trial", click on "Start".
+
+### Microsoft Learn Resources
+
+[Core Cloud Services - Manage services with the Azure portal](https://docs.microsoft.com/learn/modules/tour-azure-portal/?WT.mc_id=udacity_learn-wwl)
+
+## IaaS, PaaS, and SaaS
+
+[![IaaS, PaaS, And SaaS](https://img.youtube.com/vi/8X5d-pUlq5E/0.jpg)](https://www.youtube.com/watch?v=8X5d-pUlq5E)
+
+In contrast to on-premises solutions, there are three types of services that Azure offers us:
+
+* Infrastructure as a Service (IaaS) - removes the expense of up-front costs of hardware, software and test environments
+* Platform as a Service (PaaS) - handles networking, provides middleware and development & database tools
+* Software as a Service (SaaS) - provides end-users access to online cloud solutions
+
+![Azure services organized by IaaS, PaaS and SaaS](https://video.udacity-data.com/topher/2020/July/5f10a86a_azure-service-level-comparison/azure-service-level-comparison.png)
+
+### QUIZ QUESTION
+
+Match the below situations to which of the cloud services types they represent.
+
+**[IaaS]**: You need a high level of control over the cloud service, even down to the operating system level. An Azure Virtual Machine is one example of this cloud service type.
+
+**[PaaS]**: You need to quickly deploy a web application. An App Service is one example of this cloud service type.
+
+**[SaaS]**: You want an already pre-built office productivity suite for your employees to work with. Microsoft Office 365 is an example of this cloud service type.
