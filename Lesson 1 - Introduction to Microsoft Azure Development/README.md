@@ -175,3 +175,59 @@ Match the below situations to which of the cloud services types they represent.
 **[PaaS]**: You need to quickly deploy a web application. An App Service is one example of this cloud service type.
 
 **[SaaS]**: You want an already pre-built office productivity suite for your employees to work with. Microsoft Office 365 is an example of this cloud service type.
+
+
+## Tools & Environment
+
+[![Tools & Environment](https://img.youtube.com/vi/aH_2wE-s2Vo/0.jpg)](https://www.youtube.com/watch?v=aH_2wE-s2Vo)
+
+### Tools & Environment Checklist
+
+It's time to get all the tools you need to get started!
+
+* Sign up for an Azure free account [here](https://azure.microsoft.com/en-us/free/), if you haven't already.
+* Create a Github account [here](https://github.com/join)
+* Install Python 3.6 or above [here](https://www.python.org/downloads/)
+* Install Azure CLI tools for VS Code [here](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azurecli), or search for it within VS Code.
+* Additionally, install Azure CLI for your terminal [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest).
+
+### Microsoft Learn Resources
+
+* [Create an Azure account](https://docs.microsoft.com/learn/modules/create-an-azure-account/?WT.mc_id=udacity_learn-wwl)
+* [Control Azure services with the CLI](https://docs.microsoft.com/learn/modules/control-azure-services-with-cli/?WT.mc_id=udacity_learn-wwl)
+* [Prepare your development environment for Azure development](https://docs.microsoft.com/learn/modules/prepare-your-dev-environment-for-azure-development/?WT.mc_id=udacity_learn-wwl)
+* [Implement a code workflow in your build pipeline by using Git and GitHub](https://docs.microsoft.com/learn/modules/implement-code-workflow/?WT.mc_id=udacity_learn-wwl)
+
+
+## Project: Deploy an Article CMS to Azure
+
+[![Project - Deploy An Article CMS To Azure](https://img.youtube.com/vi/cqrOmTP1q_g/0.jpg)](https://www.youtube.com/watch?v=cqrOmTP1q_g)
+
+It is exciting to take a look at what we will be creating in our final course project. Similar to many such systems that exist in the real world, we will be designing, building, and deploying an Article Content Management System (CMS), which will include the ability to:
+
+* Login and authenticate
+* Read posts
+* Create and save a post
+* Edit and save an existing post
+
+The project looks straightforward from the user interface, but there is a lot going on under the hood of this Flask app. The Sign In page makes use of the Microsoft Authentication Library (MSAL) and Azure Active Directory to log in with a Microsoft account, while data related to article titles, authors and text bodies is stored in an Azure SQL Server. An Azure Storage Account with Blob Storage is used to store the images, and the web app itself can be deployed using either an Azure Virtual Machine or an Azure App Service. All of these resources are likely tied to a single resource group.
+
+![An example article within the deployed CMS](https://video.udacity-data.com/topher/2020/March/5e6f8ed6_article-cms/article-cms.png)
+
+## Glossary
+
+Key Term                            |	Definition
+------------------------------------| -----------------------------------------
+The Cloud                           | A collection of servers on the internet that store and manage data, run apps, and deliver content such as email or videos.
+Cloud Computing                     | The delivery of software and storage over the Internet (i.e. the cloud).
+Public Cloud                        | Cloud computing resources shared amongst multiple customers, with applications and data still separate.
+Private Cloud                       | Cloud computing resources that are dedicated to only one entity. This is most similar to how on-premises resources operate, but with the resources still hosted off-site by a third party.
+Hybrid Cloud                        | Utilizing a mix of public and private cloud resources.
+Cloud Developer	                    | Developers who build cloud applications or utilize other cloud resources in their applications. They are responsible for ensuring applications run efficiently in the cloud, requiring appropriate authentication to access, and identifying appropriate resources to use.
+Microsoft Azure	                    | A public computing platform provided by Microsoft, with many products spanning many categories, such as Compute, Analytics, Databases, A.I. and Machine Learning.
+Azure Portal                        | The browser-based and GUI version of working with Azure resources.
+Elasticity                          | The ability to scale up or down resources to match demand.
+On-Premises	                        | The non-cloud option where companies host all their necessary compute, storage and other resources on-site.
+Infrastructure as a Service (Iaas)  | Removes the expense of up-front costs of hardware, software and test environments, as the cloud provider is instead responsible for providing physical hardware.
+Platform as a Service (Paas)        | Handles networking, provides middleware and development & database tools, in addition to the physical hardware provided at the IaaS level.
+Software as a Service (Saas)        | Provides end-users access to online cloud solutions, without the need to build or support the underlying applications themselves.
