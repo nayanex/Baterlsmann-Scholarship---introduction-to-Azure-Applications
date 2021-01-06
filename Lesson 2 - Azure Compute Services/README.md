@@ -2,6 +2,8 @@
 
 [![Introduction](https://img.youtube.com/vi/UkXt_e9-SYc/0.jpg)](https://www.youtube.com/watch?v=UkXt_e9-SYc)
 
+![The Course and Lesson Outline.](https://video.udacity-data.com/topher/2020/July/5f10a6cb_course-outline-compute/course-outline-compute.png)
+
 ## Big Picture: Compute Services
 
 [![Big Picture - Compute Services](https://img.youtube.com/vi/JMbPWOjSCZ8/0.jpg)](https://www.youtube.com/watch?v=JMbPWOjSCZ8)
@@ -15,6 +17,16 @@ There are a lot of compute services available through Azure, each with their own
 * Container Instances
 * Service Fabric
 * Azure Kubernetes Service (AKS)
+
+### QUIZ QUESTION
+
+Which of the following are Azure compute services?
+
+[x] Virtual Machines
+[] Key Vault
+[x] App Service
+[] SQL Database
+[x] Azure Functions
 
 **Microsoft Learn Resources**
 
