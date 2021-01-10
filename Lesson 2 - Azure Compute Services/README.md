@@ -56,7 +56,7 @@ When choosing a region, it's important to consider what you are trying to achiev
 
 To set up a resource group in the Azure Portal:
 
-* Go to the Azure [Portal homepage](https://portal.azure.com/#home)
+* Go to the [Azure Portal homepage](https://portal.azure.com/#home)
 * Click "Create a Resource Group"
 * Search for "Resource group" and click "Create"
 * You'll need to select the subscription for the resource group, name it, and select a region
@@ -74,6 +74,14 @@ Why is choosing the appropriate region (or deploying to multiple regions) for yo
 [x] Users located closer to the resources will experience less latency.
 
 [] You should always choose the options closest to you.
+
+### QUIZ
+
+Match each of the below terms to their respective definitions.
+
+* [Subscription]: Billing and policies for resources are grouped at this level.
+* [Region]: Where resources are located in the world.
+* [Resource Group]: Oftentimes, used to group together resources related to a single application to help with management.
 
 ### Microsoft Learn Resources
 
@@ -151,6 +159,14 @@ Some of the limitations of an App Service are:
 ### Use Cases
 
 Each of these has their own use cases, although sometimes there is still some ambiguity on when to use each. Virtual Machines are usually better when you need control of the underlying operating system or are using custom software to support your needs; an app service is typically better for lightweight applications and services, especially when you don't have the need for high performance compute services. Additionally, you'll need to take into consideration the hardware limitations of App Services, as noted above.
+
+### QUIZ
+
+Match the below features to which compute service they relate.
+
+* [Virtual Machine]: IaaS option giving the developer complete control over deployment and the technology stack of the operating system. Provides tiers getting into substantially more memory and CPU cores.
+* [App Service]: PaaS option allowing the developer to focus on app development while receiving less control over the deployment pipeline. Tiers provide less memory and CPU cores.
+* [Neither]: Able to deploy containerized apps onto Kubernetes clusters.
 
 ## Exercise: Virtual Machines vs. App Services
 
@@ -293,8 +309,21 @@ If we no longer need a resource, we can delete them through the portal.
 
 ### QUIZ
 
+Put the steps of deploying an app to a Virtual Machine in Azure in the appropriate order.
+
+1. Create or utilize a resource group
+2. Create the Virtual Machine
+3. Connect to the VM
+4. Install any dependencies.
+5. Run the application.
+
+### QUIZ
+
 You've gone through all the steps for creating a Virtual Machine and deploying an app to it, and everything appears to be working from within the VM itself. However, when you navigate to the public IP address, it gives a connection error. Which of the following is a likely cause of the issue?
 
+[] You need to turn off the VM's firewall
+[] You forgot to add a required library in the app's virtual environment
+[] The VM has a bug and needs to be restarted
 [x] You need to make sure the VM is listening to port 80.
 
 ### Microsoft Learn Resources
