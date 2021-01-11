@@ -418,6 +418,14 @@ az vm create \
 
 3. Upon success, you will have a JSON response.
 4. Next we will open port 80 to allow outside traffic to our VM
+
+```bash
+az vm open-port \
+    --port "80" \
+    --resource-group "resource-group-west" \
+    --name "linux-vm-west"
+```
+
 5. Upon success, you will receive a JSON response.
 
 ### Connecting to the VM
@@ -472,7 +480,7 @@ To deploy the app on the virtual machine, I did the following:
 4. Upgrade pip in our virtual environment and then Install dependencies
 `pip install --upgrade pip pip install -r requirements.txt`
 5. We'll run our app `python application.py`
-6. In a web browser, we can visit the publicIpaddress
+6. In a web browser, we can visit the public Ip address
 7. Type "exit" to disconnect from the VM
 
 ### Cleanup
@@ -480,3 +488,89 @@ To deploy the app on the virtual machine, I did the following:
 If we no longer need a resource, we can delete them through the portal. The quickest way to do this from the CLI is to delete the resource group. This will delete all resources in that group
 
 `az group delete -n resource-group-west`
+
+## Creating an App Service
+
+ [![Creating An App Service Part 1](https://img.youtube.com/vi/C4B4Ebchf0U/0.jpg)](https://www.youtube.com/watch?v=C4B4Ebchf0U)
+
+ I took the following steps to create an App Service Web App using the Azure Portal
+
+1. On the homepage, click "Create a resource"
+2. Search for "Web App"
+3. Click "Create"
+4. Select your subscription
+5. Select your resource group "resource-group-west"
+6. Enter a name for your web app—This needs to be a unique name and is unique to Azure as a whole and not just your Azure account. I used "hello-world1234" as my unique name.
+7. For Publish, select "Code"
+8. For the "Runtime Stack", select "Python 3.7" or greater.
+9. For the "Operating System" select "Linux"
+10. Select a region for your app service
+11. Create a new App Service Plan. You can keep the default name Azure gives you or you can create your own name.
+12. For SKU and size, select "F1" (Free).
+13. Click "Review + Create"
+14. Click "Create"
+
+Then, I clicked on the URL to see the app service, which confirmed the app service was up and running. Now we need to deploy our code.
+
+**Note:** Azure free account only allows 1 Linux App Service of size F1. You will need to delete the App Service Web App along with the App Service Plan after each exercise since we will create other Linux App Services throughout this course.
+
+[![Creating An App Service Part 2](https://img.youtube.com/vi/bpME7sOhPNg/0.jpg)](https://www.youtube.com/watch?v=bpME7sOhPNg)
+
+To deploy an App Service from a GitHub repository, I did the following:
+
+1. Go to Deployment Center
+2. Choose GitHub
+3. Choose org and repo
+4. Go through the prompts; deployment takes a few minutes
+5. Go to URL of web app and should see the app deployed
+
+### Cleanup
+If we no longer need a resource, we can delete them through the portal.
+
+1. From the homepage, click on "Resource Group".
+2. Click on the resource group you want to manage.
+3. You have two options—"Delete resource group" or if you want to keep the resource group, you can click on the individual or collection of resources you want to delete and click on "Delete".
+
+### QUIZ
+
+Put the steps of deploying an app to an App Service in Azure in the appropriate order.
+
+1. Create or utilize a resource group
+2. create the App Service
+3. Deploy code to the app service
+
+### Microsoft Learn Resources
+
+* [Host a web application with Azure App service](https://docs.microsoft.com/learn/modules/host-a-web-app-with-azure-app-service/?WT.mc_id=udacity_learn-wwl)
+* [Manage an App Service plan in Azure](https://docs.microsoft.com/azure/app-service/app-service-plan-manage?WT.mc_id=udacity_learn-wwl)
+* [Deploy a website to Azure with Azure App Service](https://docs.microsoft.com/learn/paths/deploy-a-website-with-azure-app-service/?WT.mc_id=udacity_learn-wwl)
+
+## Exercise: Create and Deploy an App Service Web App
+
+**Prerequisites:**
+
+* A GitHub Account. If you don’t have one, create one [here](https://github.com/).
+
+
+### Create an App Service Web App
+
+Create an App Service Web App with the following configuration:
+
+* Resource-Group: resource-group-west
+* Web App Name: unique name
+* Publish: Code
+* Runtime stack: Python 3.7
+* Operating System: Linux
+* Region: West US or the closest region to you
+* App Service Plan: Default name or Create new with a name of your choice
+* SKU and size: F1 (Free)
+
+**Note:** Azure free account only allows one Linux App Service of size F1. 
+
+### Deploy the App Service Web App
+
+It’s finally time to deploy some code to Azure! Download the web app code provided [here](https://video.udacity-data.com/topher/2020/July/5f18767d_create-app-service-starter/create-app-service-starter.zip).
+
+1. Create a new repo and push the web app code to the repo
+2. On Azure portal in the Deployment Center, deploy the web app from GitHub
+3. Navigate to the deployed URL
