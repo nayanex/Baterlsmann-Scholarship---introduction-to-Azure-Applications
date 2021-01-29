@@ -1,4 +1,15 @@
-# Baterlsmann-Scholarship---introduction-to-Azure-Applications
+## Introduction
+
+[![Creating An App Service Part 1](https://img.youtube.com/vi/rc_GZ9vPE2U/0.jpg)](https://www.youtube.com/watch?v=rc_GZ9vPE2U)
+
+In this lesson, you will:
+
+* Take a look at all the different storage options available in Azure and their benefits
+* Take a deep dive on Azure SQL Databases and Blob Storage, including creating the related resources and uploading data
+* Connect those storage services to your app
+
+
+![The Course and Lesson Outline](https://video.udacity-data.com/topher/2020/July/5f10a6f7_course-outline-storage/course-outline-storage.png)
 
 ## Connecting Your App to Storage
 
