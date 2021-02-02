@@ -36,3 +36,13 @@ Microsoft Learn Resources
 Secure Azure Active Directory users with Multi-Factor Authentication
 Enable secure access to apps for external users with Azure AD B2C
 Monitor and report on security events in Azure AD
+
+
+## OAuth2 with MSAL Part 2
+
+### MSAL in Code
+
+There are a few key parts to implement in your code when working with MSAL. Note that the library is just `msal` if you install it with `pip install`.
+
+
+[![MSAL Process Part 2](https://img.youtube.com/vi/7OS920xtw1A/0.jpg)](https://www.youtube.com/watch?v=7OS920xtw1A)
