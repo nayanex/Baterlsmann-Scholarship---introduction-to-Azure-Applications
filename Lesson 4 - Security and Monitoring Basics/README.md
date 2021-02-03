@@ -1,3 +1,23 @@
+## Case Study: Security Best Practices
+
+While we'll focus largely on Azure Active Directory and the Microsoft Authentication library in upcoming sections, it's important to also look at the broader contexts of best practices in security for the different deployment types we had earlier in the course - IaaS (with Virtual Machines) and PaaS (with App Services).
+
+Microsoft has put together some great documentation for best practices for both of these, so first spend a few minutes reading each post (or at a minimum, skimming them).
+
+* (IaaS Security Best Practices)[https://docs.microsoft.com/en-us/azure/security/fundamentals/iaas]
+* (PaaS Security Best Practices)[https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-deployments]
+
+You'll use the knowledge from each of these to answer the below quizzes.
+
+### Deep Dive - PaaS
+
+If you want, you can also dive a little deeper on the PaaS side of things with more specific articles around App Services, Azure SQL Database and Azure Storage with the below links, but they aren't required to answer the quiz questions.
+
+* (Deep Dive: App Service Best Practices)[https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-applications-using-app-services]
+* (Deep Dive: Azure SQL Database Best Practices)[https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-applications-using-sql]
+* (Deep Dive: Azure Storage)[https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-applications-using-storage]
+
+
 ## Azure Active Directory
 
  [![Creating An App Service Part 1](https://img.youtube.com/vi/7jZxyvMsVtI/0.jpg)](https://www.youtube.com/watch?v=7jZxyvMsVtI)
