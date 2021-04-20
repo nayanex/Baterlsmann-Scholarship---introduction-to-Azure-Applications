@@ -79,9 +79,9 @@ Why is choosing the appropriate region (or deploying to multiple regions) for yo
 
 Match each of the below terms to their respective definitions.
 
-* [Subscription]: Billing and policies for resources are grouped at this level.
-* [Region]: Where resources are located in the world.
-* [Resource Group]: Oftentimes, used to group together resources related to a single application to help with management.
+* **[Subscription]:** Billing and policies for resources are grouped at this level.
+* **[Region]:** Where resources are located in the world.
+* **[Resource Group]:** Oftentimes, used to group together resources related to a single application to help with management.
 
 ### Microsoft Learn Resources
 
@@ -117,7 +117,7 @@ You can reference the [Azure CLI documentation](https://docs.microsoft.com/cli/a
 
 ## Virtual Machines vs. App Services
 
-[![Virutal Machines Vs. App Services](https://img.youtube.com/vi/zvSHartWx9g/0.jpg)](https://www.youtube.com/watch?v=zvSHartWx9g)
+[![Virtal Machines Vs. App Services](https://img.youtube.com/vi/zvSHartWx9g/0.jpg)](https://www.youtube.com/watch?v=zvSHartWx9g)
 
 ### Virtual Machines
 
@@ -164,9 +164,9 @@ Each of these has their own use cases, although sometimes there is still some am
 
 Match the below features to which compute service they relate.
 
-* [Virtual Machine]: IaaS option giving the developer complete control over deployment and the technology stack of the operating system. Provides tiers getting into substantially more memory and CPU cores.
-* [App Service]: PaaS option allowing the developer to focus on app development while receiving less control over the deployment pipeline. Tiers provide less memory and CPU cores.
-* [Neither]: Able to deploy containerized apps onto Kubernetes clusters.
+* **[Virtual Machine]:** IaaS option giving the developer complete control over deployment and the technology stack of the operating system. Provides tiers getting into substantially more memory and CPU cores.
+* **[App Service]:** PaaS option allowing the developer to focus on app development while receiving less control over the deployment pipeline. Tiers provide less memory and CPU cores.
+* **[Neither]:** Able to deploy containerized apps onto Kubernetes clusters.
 
 ## Exercise: Virtual Machines vs. App Services
 

@@ -132,7 +132,7 @@ So what’s next? Cloud computing is on the rise in this day and age. As cloud c
 
 ## Microsoft Azure
 
-[![Microsoft Azure](https://img.youtube.com/vi/8Py-MVOl3YS8&t/0.jpg)](https://www.youtube.com/watch?v=Py-MVOl3YS8&t)
+[![Microsoft Azure](https://img.youtube.com/vi/Py-MVOl3YS8/0.jpg)](https://www.youtube.com/watch?v=Py-MVOl3YS8&t)
 
 Azure is a public computing platform with tremendous value and benefits:
 
@@ -179,6 +179,7 @@ Match the below benefits to their descriptions.
 ## The Azure Portal
 
 [![The Azure Portal](https://img.youtube.com/vi/0qb__6Frgn0/0.jpg)](https://www.youtube.com/watch?v=0qb__6Frgn0)
+
 
 ### Practice - The Azure Portal
 
