@@ -391,13 +391,14 @@ Once you're done with the exercise, be sure to delete the VM and it's resources 
 
 **Note:** Azure free accounts only allow 750 hours of free hosting. Make sure to delete this VM after completing the exercise to avoid charges.
 
-Supporting Materials
- [create-vm-starter.zip](https://video.udacity-data.com/topher/2020/July/5f1875e2_create-vm-starter/create-vm-starter.zip)
+#### Supporting Materials
+
+[create-vm-starter.zip](https://video.udacity-data.com/topher/2020/July/5f1875e2_create-vm-starter/create-vm-starter.zip)
 
 
- ### Solution: Creating a Virtual Machine
+### Solution: Creating a Virtual Machine
 
- [![Solution - Creating A Virtual Machine Part 1](https://img.youtube.com/vi/a5gKkVARnXU/0.jpg)](https://www.youtube.com/watch?v=a5gKkVARnXU)
+[![Solution - Creating A Virtual Machine Part 1](https://img.youtube.com/vi/a5gKkVARnXU/0.jpg)](https://www.youtube.com/watch?v=a5gKkVARnXU)
 
 This is an alternative way to create a Linux VM using Azure CLI. Use whichever method you feel more comfortable with moving forward. Connecting to the VM is done the same way in both instances.
 
