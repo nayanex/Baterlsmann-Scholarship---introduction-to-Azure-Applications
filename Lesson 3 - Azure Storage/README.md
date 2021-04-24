@@ -1,6 +1,6 @@
 ## Introduction
 
-[![Creating An App Service Part 1](https://img.youtube.com/vi/rc_GZ9vPE2U/0.jpg)](https://www.youtube.com/watch?v=rc_GZ9vPE2U)
+[![Introduction](https://img.youtube.com/vi/rc_GZ9vPE2U/0.jpg)](https://www.youtube.com/watch?v=rc_GZ9vPE2U)
 
 In this lesson, you will:
 
@@ -10,6 +10,80 @@ In this lesson, you will:
 
 
 ![The Course and Lesson Outline](https://video.udacity-data.com/topher/2020/July/5f10a6f7_course-outline-storage/course-outline-storage.png)
+
+## Big Picture: Storage
+
+[![Big Picture - Storage](https://img.youtube.com/vi/swQo_XH9Ngg/0.jpg)](https://www.youtube.com/watch?v=swQo_XH9Ngg)
+
+Some of the benefits of using Azure for storage are:
+
+* Automated backup and recovery
+* An option to replicate data at multiple data centers worldwide to help prevent outages from unplanned events, such as hardware failure.
+* Data analytics support
+* Data encryption for added security
+* Support for the storage of multiple data types. Azure is designed to hold 3 main types data—relational data, non-relational data or NoSQL data, and unstructured data such as images.
+* Scale up or scale out when demand is high and scale back when demand is low.
+* Eliminate the expense of having to purchase, install, configure, and maintain on premises hardware.
+
+### Azure Storage Options
+
+Among others, some of the Azure Storage options are:
+
+* Azure SQL Server and SQL Database
+* Azure Blob Storage
+* Azure CosmosDB
+* Disk Storage
+* Azure Data Lake Storage
+* HPC Cache
+
+### Microsoft Learn Resources
+
+* [Core Cloud Services - Azure data storage options](https://docs.microsoft.com/learn/modules/intro-to-data-in-azure/?WT.mc_id=udacity_learn-wwl)
+* [Choose a data storage approach in Azure](https://docs.microsoft.com/learn/modules/choose-storage-approach-in-azure/?WT.mc_id=udacity_learn-wwl)
+* [Learning Path: Store data in Azure](https://docs.microsoft.com/learn/paths/store-data-in-azure/?WT.mc_id=udacity_learn-wwl)
+* [Learning Path: Architect a data platform in Azure](https://docs.microsoft.com/learn/paths/architect-data-platform/?WT.mc_id=udacity_learn-wwl)
+
+## Azure SQL Databases
+
+[![Azure SQL Databases](https://img.youtube.com/vi/eZHNDuYasj8/0.jpg)](https://www.youtube.com/watch?v=eZHNDuYasj8)
+
+* Azure SQL databases are used for structured, relational data.
+* In Azure, you also need to first create a related SQL server to hold the database, although you can create multiple SQL databases under a single SQL server.
+* Azure SQL databases do not have a free tier option like we saw with App Services earlier; however, when you sign up for a new free Azure account, you get 12 months of up to 250GB of Azure SQL database storage. The lowest tier is currently ~$5 / month otherwise for a small amount of storage.
+
+### Creating an Azure SQL Database in the Portal
+
+To create an Azure SQL Database in the Azure Portal:
+
+1. Find the "SQL databases" service in Azure.
+2. Click "Create SQL Database".
+3. Select the appropriate subscription and resource group (likely “resource-group-west”).
+4. Enter a database name.
+5. If you already have a SQL server, you can use it; however, you likely need to click "Create New".
+
+* If creating a new SQL server, enter a server name, and then admin and password - make sure you can remember these, or you will not be able to access the server when necessary. The admin name cannot just be "admin".
+* Set the location to match the resource group.
+
+6. Keep SQL elastic pool on the default of "No".
+7. Under Compute+Storage, click on "Configure Database". While General Purpose won't end up charging you anything for the short time the server is live for these exercises, you might as well press "Looking for basic, standard, premium?", and change it to "Basic".
+8. Press the "Next: Networking" button, then select "Public Endpoint", and set both of the Firewall rules that appear to "Yes". This will allow us to more easily access the SQL database later on within our app.
+9. Click "Review + Create" and then "Create" to create the database, then wait for it to deploy.
+
+### QUIZ QUESTION
+
+Azure SQL Databases can be left up on the basic tier for no cost forever.
+
+[x] False
+
+[ ] True
+
+### Microsoft Learn Resources
+
+[Work with relational data in Azure](https://docs.microsoft.com/learn/paths/work-with-relational-data-in-azure/?WT.mc_id=udacity_learn-wwl)
+[Provision an Azure SQL database to store application data](https://docs.microsoft.com/learn/modules/provision-azure-sql-db/?WT.mc_id=udacity_learn-wwl)
+[Create an Azure Database for PostgreSQL server](https://docs.microsoft.com/learn/modules/create-azure-db-for-postgresql-server/?WT.mc_id=udacity_learn-wwl)
+
+
 
 ## Connecting Your App to Storage
 

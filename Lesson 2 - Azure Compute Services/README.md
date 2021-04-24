@@ -635,8 +635,11 @@ az appservice plan delete \
 You've built a web app, and deployed it with `az webapp up`, but seem to be getting an `ImportError` when actually trying to access the application. What change do you need to make to the app for it to work?
 
 [] Run <code>pip install</code> from the directory containing the app and re-deploy
+
 [] Add <code>--validation False</code> to the end of <code>az webapp up</code>
+
 [] Remove the library and associated code from your app, as Azure doesn't support it
+
 [x] Add the related library to <code>requirements.txt</code> and update the deployed app
 
 ## Glossary
