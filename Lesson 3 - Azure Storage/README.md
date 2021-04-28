@@ -83,7 +83,128 @@ Azure SQL Databases can be left up on the basic tier for no cost forever.
 [Provision an Azure SQL database to store application data](https://docs.microsoft.com/learn/modules/provision-azure-sql-db/?WT.mc_id=udacity_learn-wwl)
 [Create an Azure Database for PostgreSQL server](https://docs.microsoft.com/learn/modules/create-azure-db-for-postgresql-server/?WT.mc_id=udacity_learn-wwl)
 
+## Adding Data to the Database
 
+[![Adding Data To The Database](https://img.youtube.com/vi/nOqbJ/0.jpg)](https://www.youtube.com/watch?v=nOqbJ)
+
+To add data to the SQL Database, I performed the following:
+
+1. Once the SQL database is deployed, click on its name to access it (you may need to go back to the main "SQL databases" page in Azure).
+2. Click on the "Query editor" in the left side menu, and then log in with my SQL Server credentials.
+3. I pasted the query from my `posts-table-init.sql` script into the query window, and hit "Run"; you should see `Query succeeded: Affected rows: 3`.
+4. On the left side of the query window, I clicked on the "Tables" folder, and double-checked that the `dbo.POSTS` table was successfully created with the correct fields.
+5. I ran a new query with `SELECT * FROM posts`, to see the three posts listed.
+
+### QUIZ QUESTION
+
+Which of the following would be appropriate data to store in a SQL database?
+
+[x] Information about books like author, title, year published, and summary
+
+[ ] Unstructured event data
+
+[ ] Images or code repositories
+
+[x] Sales invoices, such as id, price, and item quantities
+
+## Exercise: Azure SQL Databases
+
+In this exercise, you will create an Azure SQL Database and add data to it. 
+
+1. Deploy a SQL Database in Azure called “database-west” to the “resource-group-west” resource group (or whichever resource group you have been using in earlier exercises).
+2. Within the Azure portal, add the data from the script in the `sql_scripts` directory [here](https://video.udacity-data.com/topher/2020/July/5f075d26_sql-scripts/sql-scripts.zip) to the database. You should be able to run a `SELECT` query afterward on the `animals` table to see the example animals populated in your database.
+
+**Note:** Azure free accounts only allow 250GB of free storage using SQL Databases. Once you get to the end of this lesson, you will want to delete the SQL Database and SQL Server to avoid incurring any charges.
+
+## Solution: Azure SQL Databases
+
+[![Solution - Azure SQL Databases Part 1](https://img.youtube.com/vi/xyfZkpSg2bs/0.jpg)](https://www.youtube.com/watch?v=xyfZkpSg2bs)
+
+### Create SQL Server
+
+```bash
+az sql server create \
+--admin-user udacityadmin \
+--admin-password p@ssword1234 \
+--name hello-world-server \
+--resource-group resource-group-west \
+--location westus2 \
+--enable-public-network true \
+--verbose
+```
+
+### Create Firewall rule
+
+Next, we have to create two firewall rules. These are the same two rules we checked as yes when we used the portal.
+
+The first one is to allow Azure services and resources to access the server we just created.
+
+```bash
+az sql server firewall-rule create \
+-g resource-group-west \
+-s hello-world-server \
+-n azureaccess \
+--start-ip-address 0.0.0.0 \
+--end-ip-address 0.0.0.0 \
+--verbose
+```
+
+This second rule is to set your computer's public Ip address to the server's firewall. You'll need to find your computer's public ip address for this part.
+
+I'm using macOS, so I used the command `curl ifconfig.me`; you can use `ipconfig` in the command prompt if you are on Windows.
+
+#### Create clientIp firewall rule
+
+```bash
+az sql server firewall-rule create \
+-g resource-group-west \
+-s hello-world-server \
+-n clientip \
+--start-ip-address <PUBLIC-IP-ADDRESS> \
+--end-ip-address <PUBLIC_IP_ADDRESS> \
+--verbose
+```
+
+### Create SQL Database
+
+Finally, to create the database itself, I used the below command.
+
+```bash
+az sql db create \
+--name hello-world-db \
+--resource-group resource-group-west \
+--server hello-world-server \
+--tier Basic \
+--verbose
+```
+
+### Adding Data
+
+We'll again add data to the database through the portal, as that's the most straightforward method for now (until we connect to an app).
+
+[![Solution - Azure SQL Databases Part 2](https://img.youtube.com/vi/C6nP7JAozDM/0.jpg)](https://www.youtube.com/watch?v=C6nP7JAozDM)
+
+### Cleanup
+
+You can find the CLI commands for cleaning up the SQL resources below.
+
+#### Delete DB
+```
+az sql db delete \
+--name hello-world-db \
+--resource-group resource-group-west \
+--server hello-world-server \
+--verbose
+```
+
+#### Delete SQL Server
+
+```
+az sql server delete \
+--name hello-world-server \
+--resource-group resource-group-west \
+--verbose
+```
 
 ## Connecting Your App to Storage
 
