@@ -14,3 +14,8 @@
 ### Cost Management
 
 You've set up your Azure account in an earlier course; to keep tabs on your Azure cost, and **make sure your costs don’t exceed what’s provided to you in the Azure free tier**, go to Cost Management + Billing, then to Cost Analysis. This shows a cost breakdown of the resources in your subscription. **Be sure to check this each day**, especially if you are using Terraform to create resources. **Also please enable Auto-shutdown for your VM by going to the Azure Portal > your VM > Operations > Auto-shutdown.**
+
+
+## Additional Resources
+
+[Notion Resources Prepared by Students](https://www.notion.so/Introduction-to-Azure-Applications-Challenge-Course-Study-Resources-713982b4104440a4a1bd701b6d4831ad)
