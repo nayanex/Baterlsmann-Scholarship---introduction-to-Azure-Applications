@@ -80,12 +80,14 @@ Azure SQL Databases can be left up on the basic tier for no cost forever.
 ### Microsoft Learn Resources
 
 [Work with relational data in Azure](https://docs.microsoft.com/learn/paths/work-with-relational-data-in-azure/?WT.mc_id=udacity_learn-wwl)
+
 [Provision an Azure SQL database to store application data](https://docs.microsoft.com/learn/modules/provision-azure-sql-db/?WT.mc_id=udacity_learn-wwl)
+
 [Create an Azure Database for PostgreSQL server](https://docs.microsoft.com/learn/modules/create-azure-db-for-postgresql-server/?WT.mc_id=udacity_learn-wwl)
 
 ## Adding Data to the Database
 
-[![Adding Data To The Database](https://img.youtube.com/vi/nOqbJ/0.jpg)](https://www.youtube.com/watch?v=nOqbJ)
+[![Adding Data To The Database](https://img.youtube.com/vi/nOqbJ-HTicQ/0.jpg)](https://www.youtube.com/watch?v=nOqbJ-HTicQ)
 
 To add data to the SQL Database, I performed the following:
 
@@ -297,58 +299,90 @@ You are trying to pull in some images from blob storage into your app, but have 
 ### Microsoft Learn Resources
 
 [Create an Azure Storage account](https://docs.microsoft.com/learn/modules/create-azure-storage-account/?WT.mc_id=udacity_learn-wwl)
+
 [Secure your Azure Storage account](https://docs.microsoft.com/learn/modules/secure-azure-storage-account/?WT.mc_id=udacity_learn-wwl)
+
 [Organize Azure storage blobs with properties and metadata](https://docs.microsoft.com/learn/modules/organize-blobs-properties-metadata/?WT.mc_id=udacity_learn-wwl)
+
 [Implement data archiving and retention](https://docs.microsoft.com/azure/storage/blobs/storage-blob-storage-tiers?tabs=azure-portal&WT.mc_id=udacity_learn-wwl)
+
 [Implement hot, cool, and archive storage](https://docs.microsoft.com/azure/storage/blobs/storage-blob-storage-tiers?tabs=azure-portal&WT.mc_id=udacity_learn-wwl) (same content as above)
+
 [Move items in Blob storage between storage accounts or containers](https://docs.microsoft.com/learn/modules/copy-blobs-from-command-line-and-code/?WT.mc_id=udacity_learn-wwl)
+
 [Blob Storage lifecycle](https://docs.microsoft.com/azure/storage/blobs/storage-lifecycle-management-concepts?tabs=azure-portal&WT.mc_id=udacity_learn-wwl)
 
+## Exercise: Blob Storage
+
+In this exercise, you will create a Storage Account with a Blob Container capable of storing images. 
+
+1. Deploy a Storage Account in Azure to the “resource-group-west” resource group (or whichever resource group you have been using in earlier exercises).
+2. Add a Blob Container to the Storage Account named `images`.
+3. Upload an image into the container.
+
+**Note:** Azure free accounts only allow 5GB of free blob storage. Once you get to the end of this lesson, you will want to delete the Storage Account to avoid incurring any charges.
+
+## Solution: Blob Storage
+
+[![Solution - Blob Storage](https://img.youtube.com/vi/0fpwGAA0BFw/0.jpg)](https://www.youtube.com/watch?v=0fpwGAA0BFw)
+
+In this solution video, I showed you an alternative way to create an Azure Storage Account and a Storage Container using Azure CLI.
+
+First we create our storage account. We use the following command:
+
+```
+az storage account create \
+ --name helloworld12345 \
+ --resource-group resource-group-west \
+ --location westus2
+```
+
+The storage will default to general purpose V2 and the access tier cannot be set, so it will default to hot.
+
+Then we create our container.
+
+```
+az storage container create \
+ --account-name helloworld12345 \
+ --name images \
+ --auth-mode login \
+ --public-access container
+```
+
+You can go to the portal to check that the storage account and container have been created. You can then upload an image through the portal.
+
+Lastly, we set up a new lifecycle management rule for an alert, which can be found under "Blob Service" within your Storage Account, under "Lifecycle Management".
+
 ## Connecting Your App to Storage
+
+[![Connecting Your App To Storage Part 1](https://img.youtube.com/vi/4n_L0OlldXc/0.jpg)](https://www.youtube.com/watch?v=4n_L0OlldXc)
 
 To connect an app to the storage we've set up, we need a few things from each storage service.
 
 From the SQL server and database:
 
-SQL Server server name (the name of the sql server with .database.windows.net appended to it)
-Admin username
-Admin password
-SQL Database name
+1. SQL Server server name (the name of the sql server with .database.windows.net appended to it)
+2. Admin username
+3. Admin password
+4. SQL Database name
+
 From blob storage:
 
-Storage account name
-A storage account access key
-Container name
+1. Storage account name
+2. A storage account access key
+3. Container name
+
 In our case, we're keeping the management of these values a bit simpler with a config.py file that will be imported into the primary app file.
 
-Azure Storage Blob Library for Python
+### Azure Storage Blob Library for Python
 
-In order to interact with our Azure blob storage from within the Python web app, we'll need the Azure Storage Blob Library. Note that you can install this with pip install azure-storage-blob, and you'll need to make sure to include the library in your requirements.txt file in your own apps.
+[![Connecting Your App To Storage Part 2](https://img.youtube.com/vi/Fra5C7MdRGc/0.jpg)](https://www.youtube.com/watch?v=Fra5C7MdRGc)
 
-We will largely focus on the BlobServiceClient class. This class has three methods we’ll use:
+In order to interact with our Azure blob storage from within the Python web app, we'll need the [Azure Storage Blob Library](https://pypi.org/project/azure-storage-blob/). Note that you can install this with pip install azure-storage-blob, and you'll need to make sure to include the library in your requirements.txt file in your own apps.
 
-get_blob_client - creates a blob client using the filename as the name for the blob
-upload_blob - upload the file to the blob container
-delete_blob - delete a blob from a blob container
-Uploading a blob
-Here is the code I included for uploading a blob.
+We will largely focus on the `BlobServiceClient` class. This class has three methods we’ll use:
 
-from azure.storage.blob import BlobServiceClient
-
-blob_container = app.config['BLOB_CONTAINER']
-storage_url = "https://{}.blob.core.windows.net/".format(app.config['BLOB_ACCOUNT'])
-blob_service = BlobServiceClient(account_url=storage_url, credential=app.config['BLOB_STORAGE_KEY'])
-
-blob_client = blob_service.get_blob_client(container=blob_container, blob=filename)
-blob_client.upload_blob(file)
-Note that I am getting the BLOB_CONTAINER name from the configuration file, which was attached to the Flask app separately. I do a similar procedure for getting the BLOB_ACCOUNT AND BLOB_STORAGE_KEY where needed. I then use the aforementioned get_blob_client and upload_blob functions to upload a file.
-
-You might notice that there is a filename and file used here - these are not the same things! The filename is just the name of the file, e.g. test_image.png, while the file is the actual file object. So, the blob client is first called to create a blob with the given filename, and then the file is uploaded into that filename blob.
-
-Deleting a blob
-Assuming you've already defined the blob_service from before, you just need to get a new blob client with get_blob_client for the related container and filename, then delete_blob.
-
-blob_client = blob_service.get_blob_client(container=blob_container, blob=filename)
-blob_client.delete_blob()
-It's important to note here you don't need a file to feed to delete_blob - by specifying the filename when you get_blob_client, it already knows what blob you are referring to.
+* `get_blob_client` - creates a blob client using the filename as the name for the blob
+* `upload_blob` - upload the file to the blob container
+* `delete_blob` - delete a blob from a blob container
 
