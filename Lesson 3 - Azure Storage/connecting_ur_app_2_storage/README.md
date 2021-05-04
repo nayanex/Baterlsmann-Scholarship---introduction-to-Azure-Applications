@@ -5,6 +5,8 @@ to your earlier deployed SQL database and Blob Storage to populate the zoo appli
 
 If you already closed down your database and blob storage, you'll want to go back and re-create them before getting started.
 
+Download the starter code for the app [here](https://video.udacity-data.com/topher/2020/July/5f188996_connect-app-to-storage-starter/connect-app-to-storage-starter.zip).
+
 1. First, familiarize yourself at least with the `views.py` file in the `FlaskExercise` directly, although you may also want to check out the other files. You can see an example screenshot of the deployed application below.
     <br><img src="example-connected-app.png" width="500" />
 2. Next, add the necessary environment variables to connect to the SQL database in `config.py`.
@@ -24,3 +26,8 @@ storage connections, but other changes may be necessary.
     brew install unixodbc
     ```
 - Check [here](https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver15) to add SQL Server drivers for Mac. [This StackOverflow post](https://stackoverflow.com/questions/44527452/cant-open-lib-odbc-driver-13-for-sql-server-sym-linking-issue) may also help resolve certain issues.
+
+
+**Supporting Materials**
+
+[connect-app-to-storage-starter.zip](https://video.udacity-data.com/topher/2020/July/5f188996_connect-app-to-storage-starter/connect-app-to-storage-starter.zip)

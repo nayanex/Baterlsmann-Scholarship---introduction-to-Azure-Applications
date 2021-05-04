@@ -378,7 +378,7 @@ In our case, we're keeping the management of these values a bit simpler with a c
 
 [![Connecting Your App To Storage Part 2](https://img.youtube.com/vi/Fra5C7MdRGc/0.jpg)](https://www.youtube.com/watch?v=Fra5C7MdRGc)
 
-In order to interact with our Azure blob storage from within the Python web app, we'll need the [Azure Storage Blob Library](https://pypi.org/project/azure-storage-blob/). Note that you can install this with pip install azure-storage-blob, and you'll need to make sure to include the library in your requirements.txt file in your own apps.
+In order to interact with our Azure blob storage from within the Python web app, we'll need the [Azure Storage Blob Library](https://pypi.org/project/azure-storage-blob/). Note that you can install this with `pip install` azure-storage-blob`, and you'll need to make sure to include the library in your `requirements.txt` file in your own apps.
 
 We will largely focus on the `BlobServiceClient` class. This class has three methods we’ll use:
 
@@ -386,3 +386,107 @@ We will largely focus on the `BlobServiceClient` class. This class has three met
 * `upload_blob` - upload the file to the blob container
 * `delete_blob` - delete a blob from a blob container
 
+#### Uploading a blob
+
+Here is the code I included for uploading a blob.
+
+```python
+from azure.storage.blob import BlobServiceClient
+
+blob_container = app.config['BLOB_CONTAINER']
+storage_url = "https://{}.blob.core.windows.net/".format(app.config['BLOB_ACCOUNT'])
+blob_service = BlobServiceClient(account_url=storage_url, credential=app.config['BLOB_STORAGE_KEY'])
+
+blob_client = blob_service.get_blob_client(container=blob_container, blob=filename)
+blob_client.upload_blob(file)
+```
+
+Note that I am getting the `BLOB_CONTAINER` name from the configuration file, which was attached to the Flask app separately. I do a similar procedure for getting the `BLOB_ACCOUNT` AND `BLOB_STORAGE_KEY` where needed. I then use the aforementioned `get_blob_client` and `upload_blob` functions to upload a file.
+
+You might notice that there is a `filename` and `file` used here - these are not the same things! The `filename` is just the name of the file, e.g. `test_image.png`, while the `file` is the actual file object. So, the blob client is first called to create a blob with the given `filename`, and then the `file` is uploaded into that `filename` blob.
+
+#### Deleting a blob
+
+Assuming you've already defined the `blob_service` from before, you just need to get a new blob client with `get_blob_client` for the related container and `filename`, then `delete_blob`.
+
+```
+blob_client = blob_service.get_blob_client(container=blob_container, blob=filename)
+blob_client.delete_blob()
+```
+
+It's important to note here you don't need a file to feed to `delete_blob` - by specifying the `filename` when you `get_blob_client`, it already knows what blob you are referring to.
+
+### QUIZ QUESTION
+
+Match the below endpoints to which resource they are related to. Only one goes with each!
+
+ENDPOINT                | ASSOCIATED RESOURCE
+------------------------|---------------------
+
+`.database.windows.net` | SQL Server
+
+
+`.azurewebsites.net`    | App Service
+
+
+`.blob.core.windows.net`| Storage Account
+
+
+### QUIZ QUESTION
+
+You create a book app showing book names, authors and front covers. You successfully connect your app to storage, and can see information queried from a SQL database within the app. When you add images to the app through your blob storage account, you don't see any errors, but they show up as broken images within the app afterward. They do appear in the container in the portal. What went wrong?
+
+[ ] The app is failing to connect to the SQL database
+
+[x] The app may not have any way to associate the book cover image to related query data
+
+[ ] The app is failing to connect to blob storage
+
+[ ] You need to deploy the app with `az webapp up`
+
+### Microsoft Learn Resources
+
+* [Connect an app to Azure Storage](https://docs.microsoft.com/learn/modules/connect-an-app-to-azure-storage/?WT.mc_id=udacity_learn-wwl)
+
+* [Store application data with Azure Blob storage](https://docs.microsoft.com/learn/modules/store-app-data-with-azure-blob-storage/?WT.mc_id=udacity_learn-wwl)
+
+
+## Solution: Connecting Your App to Storage
+
+[![Solution - Connecting Your App To Storage](https://img.youtube.com/vi/7Wev-BXDovs/0.jpg)](https://www.youtube.com/watch?v=7Wev-BXDovs)
+
+
+### To connect with the SQL Database:
+
+1. Within `config.py`, fill out the:
+
+* `SQL_SERVER` with the URL of your SQL Server, e.g. `{YOUR-SQL_SERVER}.database.windows.net`
+* `SQL_DATABASE` with the name of your SQL Database
+* `SQL_USER_NAME` with the username for your SQL Server
+* `SQL_PASSWORD` with the password for your SQL Server
+
+
+### To connect to the Blob Storage Container:
+
+1. Within `config.py`, fill out the:
+
+* `BLOB_ACCOUNT` with the name of your storage account (above the container level)
+* `BLOB_STORAGE_KEY` with the primary access key for your storage account. From the Azure portal, navigate to the storage account, and then under "Setting", click on "Access keys". Copy and paste the "Key" under "key1", including the double equal signs ("==") at the end.
+* `BLOB_CONTAINER` with the name of your blob container, likely `images`
+
+2. Within `models.py`, you'll need to use the `BlobServiceClient` called `blob_service` to get a Blob Client using the container name and related filename, and then either upload or delete the blob as follows:
+
+```python
+try:
+     blob_client = blob_service.get_blob_client(container=blob_container, blob=filename)
+     blob_client.upload_blob(file)
+     if self.image_path: # Get rid of old image, since it's replaced
+         blob_client = blob_service.get_blob_client(container=blob_container, blob=self.image_path)
+         blob_client.delete_blob()
+```
+
+### Why to Use a Random Filename
+
+You might be wondering why a random filename was chosen for our blob upload. Well, let's say you've created an app, and uploaded a `tiger.png` file to it. You give access to some of your friends to add more animals to it, and as a joke, they upload a picture of an elephant under the name `tiger.png` as well. Your original tiger image would be deleted and replaced.
+
+Even outside of a friendly joke, it's quite likely as your app scales up to thousands (and hopefully millions!) of users, they will be uploading files with the same names as others, if you don't randomize them. With unique, random filenames, you won't have to worry about this issue.
