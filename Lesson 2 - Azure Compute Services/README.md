@@ -645,7 +645,7 @@ You've built a web app, and deployed it with `az webapp up`, but seem to be gett
 ## Glossary
 
 Key Term                       |	Definition
--------------------------------| -----------------------------------------
+-------------------------------|------------------------------------------
 Subscription	               | Multiple of these can exist within a single Azure account; often used for billing and other management purposes.
 Resource Group	               | Help to organize resources you use, such as Virtual Machines, App Services or storage, in order to make resource management easier. Groups are often set up for different projects or regions.
 Region	                       | Locations of Azure data centers around the world. The closer the region of app resources is to the end user, the lower the latency experienced.

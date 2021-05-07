@@ -1,3 +1,20 @@
+# Lesson4 - Security and Monitoring Basics
+
+## Introduction
+
+[![Introduction](https://img.youtube.com/vi/D0U8Hnk086w/0.jpg)](https://www.youtube.com/watch?v=D0U8Hnk086w)
+
+In this lesson, you'll:
+
+* Differentiate the security responsibilities between cloud developers and the cloud provider
+* Discover the various security options available in Azure
+* Get hands-on with Azure Active Directory, OAuth 2.0, and the Microsoft Authentication Library (MSAL)
+* Add monitoring and logging into your Azure applications, including storing logs and activating alerts
+
+Once again, this could be a course of its own, so we'll also provide a lot of additional materials for other areas to investigate outside of the scope of this lesson.
+
+![The Course and Lesson Outline](https://video.udacity-data.com/topher/2020/July/5f10a70f_course-outline-security-monitor/course-outline-security-monitor.png)
+
 ## Case Study: Security Best Practices
 
 While we'll focus largely on Azure Active Directory and the Microsoft Authentication library in upcoming sections, it's important to also look at the broader contexts of best practices in security for the different deployment types we had earlier in the course - IaaS (with Virtual Machines) and PaaS (with App Services).

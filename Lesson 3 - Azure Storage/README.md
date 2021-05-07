@@ -422,13 +422,8 @@ Match the below endpoints to which resource they are related to. Only one goes w
 
 ENDPOINT                | ASSOCIATED RESOURCE
 ------------------------|---------------------
-
 `.database.windows.net` | SQL Server
-
-
 `.azurewebsites.net`    | App Service
-
-
 `.blob.core.windows.net`| Storage Account
 
 
@@ -494,7 +489,7 @@ Even outside of a friendly joke, it's quite likely as your app scales up to thou
 ## Glossary
 
 **Key Term**	   | **Definition**
--------------------------------------------------------------------------------------------------------
+-------------------|-----------------------------------------------------------------------------------
 Azure SQL Server   | Azure SQL Databases must first have a SQL Server on which the database will be created. Multiple databases can be created on a single server.
 Azure SQL Database | Used for storing structured, relational data.
 Blob	           | A data type that can store unstructured (binary) data, and is used to store things like images or videos in a database. Blob is short for Binary Large Object.
