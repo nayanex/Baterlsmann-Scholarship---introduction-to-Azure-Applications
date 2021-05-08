@@ -70,17 +70,10 @@ Given the below security situations, which of the Azure security resource would 
 
 SITUATION                                        | SECURITY RESOURCE
 -------------------------------------------------|----------------------------------------------------
-Your company currently stores access keys and    |  Key Vault API
-client secrets on a single server on-premises.   |
-Your company wants to add a single sign on option|
-to its applications.                             |  Azure Active Directory
-You are working with an external contractor who  |
-needs access to certain resources in your Azure  |
-storage accounts.                                |  Shared Access Signatures
-With recent distributed denial of service (DDoS) |
-attacks in the news, your CEO wants to implement |  Azure Monitor
-additional measures to both identify and mitigate| 
-potential attacks.                               |
+Your company currently stores access keys and client secrets on a single server on-premises. | Key Vault API
+Your company wants to add a single sign on option to its applications.| Azure Active Directory
+You are working with an external contractor who needs access to certain resources in your Azure storage accounts. |  Shared Access Signatures
+With recent distributed denial of service (DDoS)attacks in the news, your CEO wants to implement additional measures to both identify and mitigate potential attacks. | Azure Monitor
 
 ## Case Study: Security Best Practices
 
