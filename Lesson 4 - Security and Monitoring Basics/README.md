@@ -15,6 +15,76 @@ Once again, this could be a course of its own, so we'll also provide a lot of ad
 
 ![The Course and Lesson Outline](https://video.udacity-data.com/topher/2020/July/5f10a70f_course-outline-security-monitor/course-outline-security-monitor.png)
 
+## Security Responsibilities
+
+[![Security Responsibilities](https://img.youtube.com/vi/BF_x0aKdmNw/0.jpg)](https://www.youtube.com/watch?v=BF_x0aKdmNw)
+
+Just like we saw early on in the course with technology stack differences between on-premises, IaaS, PaaS and SaaS, security responsibilities also differ among these service types. For the cloud developer, on-premises still puts all security responsibilities onto them. With IaaS, the security of physical hardware shifts to the cloud provider. With PaaS, the operating system security shifts to be the responsibility of the cloud provider, while network, application and identity security are a shared responsibility. With SaaS, the network and application shift responsibility to the cloud provider, but identity stays as a shared responsibility.
+
+It's important to note here that some security responsibilities *always* stay with the cloud developer:
+
+* Account and access management (E.g. do you give the appropriate people the right access, and revoke access when appropriate?)
+* Client endpoints (E.g. do you secure the appropriate endpoints to confidential information?)
+* Data Governance and Rights Management (E.g. do you prevent employees from emailing confidential documents to third parties?)
+
+![Developer vs. Provider Responsibilities in Azure](https://video.udacity-data.com/topher/2020/July/5f10b4be_azure-security-responsibilities/azure-security-responsibilities.png)
+
+### QUIZ QUESTION
+
+When comparing an application that used to be deployed with on-premise resources, to one now deployed on an App Service, which of the following would you no longer be responsible for, from a security standpoint?
+
+
+[x] Physical hardware running the app
+
+[x] Operating system security
+
+[ ] Application Security
+
+[ ] Client endpoints
+
+### Microsoft Learn Resources
+
+* [Cloud security](https://docs.microsoft.com/learn/modules/cmu-cloud-security/?WT.mc_id=udacity_learn-wwl)
+* [Security, responsibility, and trust in Azure](https://docs.microsoft.com/learn/modules/intro-to-security-in-azure/?WT.mc_id=udacity_learn-wwl)
+* [Use a framework to identify threats and find ways to reduce or eliminate risk](https://docs.microsoft.com/learn/modules/tm-use-a-framework-to-identify-threats-and-find-ways-to-reduce-or-eliminate-risk/?WT.mc_id=udacity_learn-wwl)
+* [Prioritize your issues and apply security controls](https://docs.microsoft.com/learn/modules/tm-prioritize-your-issues-and-apply-security-controls/?WT.mc_id=udacity_learn-wwl)
+
+## Security Options in Azure
+
+[![Security Options In Azure](https://img.youtube.com/vi/2yjmc8D7a9c/0.jpg)](https://www.youtube.com/watch?v=2yjmc8D7a9c)
+
+There are a ton of services and topics to consider in Azure, each with their own respective use cases. 
+
+* **Azure Active Directory:** Provides single sign-on (SSO) and multi-factor authentication (MFA) capabilities, such as Sign in with Microsoft
+* **App Configuration:** Stores application settings in one secure location
+* Key Vault API: Stores application keys and secrets in one secure location
+* **Managed Identities:** A part of Azure Active Directory; This helps streamline providing an app or app user access to other Azure resources
+* **Shared Access Signatures:** Give external parties certain limited access (determined by you) to different Azure resources
+* **Role-Based Access Controls (RBAC):** Help internally manage who has access to what resources, and what they can do to said resources
+* **Azure Monitor:** Provides a wide range of monitoring services such as log analytics, metrics, alerts, and much more
+* **Application Insights:** Part of Azure Monitor; This helps monitor performance and other key metrics
+
+### QUIZ QUESTION
+
+Given the below security situations, which of the Azure security resource would make the most sense to utilize for alleviating security concerns?
+
+SITUATION                                        | SECURITY RESOURCE
+-------------------------------------------------|----------------------------------------------------
+Your company currently stores access keys and    |  Key Vault API
+client secrets on a single server on-premises.   |
+-------------------------------------------------|----------------------------------------------------
+Your company wants to add a single sign on option|
+to its applications.                             |  Azure Active Directory
+-------------------------------------------------|----------------------------------------------------
+You are working with an external contractor who  |
+needs access to certain resources in your Azure  |
+storage accounts.                                |  Shared Access Signatures
+-------------------------------------------------|----------------------------------------------------
+With recent distributed denial of service (DDoS) |
+attacks in the news, your CEO wants to implement |  Azure Monitor
+additional measures to both identify and mitigate| 
+potential attacks.                               |
+
 ## Case Study: Security Best Practices
 
 While we'll focus largely on Azure Active Directory and the Microsoft Authentication library in upcoming sections, it's important to also look at the broader contexts of best practices in security for the different deployment types we had earlier in the course - IaaS (with Virtual Machines) and PaaS (with App Services).
