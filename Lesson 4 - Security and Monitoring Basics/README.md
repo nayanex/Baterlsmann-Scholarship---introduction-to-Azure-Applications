@@ -75,6 +75,23 @@ Your company wants to add a single sign on option to its applications.| Azure Ac
 You are working with an external contractor who needs access to certain resources in your Azure storage accounts. |  Shared Access Signatures
 With recent distributed denial of service (DDoS)attacks in the news, your CEO wants to implement additional measures to both identify and mitigate potential attacks. | Azure Monitor
 
+### QUIZ QUESTION
+
+Your company is developing a new app on Azure, and developers under the project are under a strict NDA to not discuss project details with others inside the company. Within the app itself, it should be able to authenticate users with their Microsoft logins, as well as log attempts to access the deployed app by non-authorized accounts. Which of the following security options might be used here?
+
+[x] Azure RBAC
+
+[x] Azure Active Directory
+
+[x] Azure Monitor
+
+[ ] Azure SQL Database
+
+### Microsoft Learn Resources
+
+[Learning Path: Manage security operations in Azure](https://docs.microsoft.com/learn/paths/manage-security-operations/?WT.mc_id=udacity_learn-wwl)
+
+
 ## Case Study: Security Best Practices
 
 While we'll focus largely on Azure Active Directory and the Microsoft Authentication library in upcoming sections, it's important to also look at the broader contexts of best practices in security for the different deployment types we had earlier in the course - IaaS (with Virtual Machines) and PaaS (with App Services).
@@ -94,10 +111,81 @@ If you want, you can also dive a little deeper on the PaaS side of things with m
 * (Deep Dive: Azure SQL Database Best Practices)[https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-applications-using-sql]
 * (Deep Dive: Azure Storage)[https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-applications-using-storage]
 
+#### QUIZ QUESTION
+
+Which of the following are security best practices related to Virtual Machines?
+
+[x] Enable encryption on VMs.
+
+[x] Identify and remediate exposed VMs that allow access from “any” source IP address.
+
+[ ] Avoid operating system updates to keep the OS stable.
+
+[x] Install the latest security updates.
+
+[x] Control VM access.
+
+#### QUIZ QUESTION
+
+Which of the following are security best practices related to App Services?
+ 
+[ ] Keep the operating system up to date.
+
+[x] Authenticate through Azure Active Directory.
+
+[x] Don’t put credentials and other secrets in source code or GitHub.
+
+[ ] Restrict access based on the desire to know and most privilege security principles.
+
+[x] Perform security penetration testing.
+
+#### QUIZ QUESTION
+
+Which of the below describe a difference in best practices between Virtual Machines and App Services?
+
+[ ] Virtual Machines require less attention to the underlying operating system itself.
+
+[ ] Azure Active Directory only applies to App Service solutions.
+
+[ ] Role-based access controls (RBAC) can only be applied to VMs.
+
+[x] App Services do not have best practices around hard disks.
+
+[ ] There are no differences in best practices between Virtual Machines and App Services.
+
+
+#### QUIZ QUESTION
+
+You are moved onto a project at work, and given your Azure experience, are asked to identify any security issues. One virtual machine that supports the project was deployed October 30th, 2017. What best practice may have been violated?
+
+[ ] Control VM access.
+
+[ ] Install an anti-malware solution to protect against malware.
+
+[ ] Ensure at deployment that images you built include the most recent round of Windows updates.
+
+[x] Periodically redeploy your VMs to force a fresh version of the OS.
+
+[ ] Deploy and test a backup solution.
+
+#### QUIZ QUESTION
+
+Your app service is running version 0.12.1 of a Python library, while the latest version is 2.1.3. An external party is able to access certain data due to a vulnerability fixed in version 1.5.6. What best practice may have been violated?
+
+[ ] Protect your keys.
+
+[x] Monitor the security state of your App Service environments.
+
+[ ] Use strong authentication and authorization platforms.
+
+[ ] Secure your keys and credentials to secure your PaaS deployment.
+
+[ ] Periodically redeploy your App Service to force a fresh version of the OS.
+
 
 ## Azure Active Directory
 
- [![Creating An App Service Part 1](https://img.youtube.com/vi/7jZxyvMsVtI/0.jpg)](https://www.youtube.com/watch?v=7jZxyvMsVtI)
+ [![Azure Active Directory](https://img.youtube.com/vi/7jZxyvMsVtI/0.jpg)](https://www.youtube.com/watch?v=7jZxyvMsVtI)
 
  Azure Active Directory is Microsoft’s solution for single sign-on (SSO) and multi-factor authentication (MFA). We'll be using it in combination with the Microsoft Authentication Library (MSAL) to use "Sign in with Microsoft" buttons in an app, although it can be used more broadly for identity management purposes within an organization. The "tenant" in Azure AD is usually equivalent to an organization.
 
@@ -108,31 +196,61 @@ As usual, you can start things off in the Azure Portal by just searching for "Ac
 
 To register an app in Azure AD (which does not actually need a deployed app for these steps):
 
-Click on app registrations on the left panel.
-Enter a user-facing display name.
-I allowed the widest set of accounts to access it (Accounts in any organizational directory and personal Microsoft accounts).
-When you build your own apps, you may want to be more restrictive, but in this case, it will make it easier for you to allow other users to authenticate with your app. An internal application, for instance, might be limited to a single tenant.
-You can ignore the redirect URI here for now, and revisit that when we get to implementing OAuth 2.0. However, if you already know this for your app, you can enter one here now, and any others necessary later on.
-Once the Application has been registered, you need to copy the Application (client) ID, as it’ll be used later in another exercise.
-Next, under manage on the left here, click on certificates and secrets
-Click on "+ New client secret", then enter a description (you can decide on your own desired expiration time, I chose one year). Copy down the string under "Value", and make sure you store it somewhere safe - you won't be able to see it again, and would otherwise have to create a new client secret once again. We’ll use this value and the application client ID when implementing OAuth 2.0.
+* Click on app registrations on the left panel.
+* Enter a user-facing display name.
+* I allowed the widest set of accounts to access it (Accounts in any organizational directory and personal Microsoft accounts).
+    * When you build your own apps, you may want to be more restrictive, but in this case, it will make it easier for you to allow other users to authenticate with your app. An internal application, for instance, might be limited to a single tenant.
+* You can ignore the redirect URI here for now, and revisit that when we get to implementing OAuth 2.0. However, if you already know this for your app, you can enter one here now, and any others necessary later on.
+* Once the Application has been registered, you need to copy the Application (client) ID, as it’ll be used later in another exercise.
+* Next, under manage on the left here, click on certificates and secrets
+* Click on "+ New client secret", then enter a description (you can decide on your own desired expiration time, I chose one year). Copy down the string under "Value", and make sure you store it somewhere safe - **you won't be able to see it again**, and would otherwise have to create a new client secret once again. We’ll use this value and the application client ID when implementing OAuth 2.0.
 You'll practice this yourself in the upcoming exercise.
 
-QUIZ QUESTION
+### QUIZ QUESTION
+
 You created a web app and have deployed it as a live website, with a requirement to sign in with a Microsoft account to access it. When you signed on with your own account, the app seems to appropriately log you in, but your friend, who can access the sign in page, said they could not. What might have happened? (You can answer this without seeing the next section on OAuth2!)
 
+[x] The supported account type in Azure Active Directory may limit their access
+
+[ ] You only have the app running on localhost
+
+[ ] You have to add your friend as a valid user in an Azure Active Directory database
+
+[ ] You need a new friend
 
 
+### Microsoft Learn Resources
 
+[Secure Azure Active Directory users with Multi-Factor Authentication](https://docs.microsoft.com/learn/modules/secure-aad-users-with-mfa/?WT.mc_id=udacity_learn-wwl)
+[Enable secure access to apps for external users with Azure AD B2C](https://docs.microsoft.com/learn/modules/enable-external-access-with-b2c/?WT.mc_id=udacity_learn-wwl)
+[Monitor and report on security events in Azure AD](https://docs.microsoft.com/learn/modules/monitor-report-aad-security-events/?WT.mc_id=udacity_learn-wwl)
 
+## Exercise: Azure Active Directory
 
+This exercise will get you familiar with registering an app in Azure Active Directory, which will set you up for the next exercise to use Microsoft Authentication.
 
+1. Navigate to Azure Active Directory in the Azure portal.
+If you are using a corporate Microsoft account, you might be restricted from access, in which case you would need to use a personal account for this stage of the exercise.
+2. You should already have a default tenant to use, but if not, create a new tenant and fill in the required information.
+3. Create a new app registration, and set it to allow both any organizations and personal accounts.
+4. You can ignore the Redirect URI for now, as that will be added as part of the next exercise.
+5. Copy down the "Application (client) ID", which will be used in the next exercise.
+6. Create and copy down a client secret key, which will be used in the next exercise.
 
+## Solution: Azure Active Directory
 
-Microsoft Learn Resources
-Secure Azure Active Directory users with Multi-Factor Authentication
-Enable secure access to apps for external users with Azure AD B2C
-Monitor and report on security events in Azure AD
+This is the same process as before, so we'll skip the video this time through.
+
+**To register your app and get the necessary app information for the next exercise:**
+
+1. Navigate to Azure Active Directory in the Azure portal.
+    * If you are using a corporate Microsoft account, you might be restricted from access, in which case you would need to use a personal account for this stage of the exercise.
+2. You should already have a default tenant to use, but if not, create a new tenant and fill in the required information.
+3. Navigate to the "App registrations" page, and enter a name for the app, while allowing the widest set of accounts to access it.
+    * Remember, you'll likely want to be more restrictive when creating your own apps.
+4. You can ignore the Redirect URI for now, as that will be added as part of the next exercise.
+5. After you click "Register", copy down the "Application (client) ID", as you'll need that for the next exercise.
+6. Additionally, under "Manage", click "Certificates & secrets", then "+ New client secret", then enter a description (you can decide on your own desired expiration time). Copy down string under "Value", and make sure you store it somewhere safe.
 
 
 ## OAuth2 with MSAL Part 2
