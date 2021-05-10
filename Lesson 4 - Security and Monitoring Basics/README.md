@@ -222,7 +222,9 @@ You created a web app and have deployed it as a live website, with a requirement
 ### Microsoft Learn Resources
 
 [Secure Azure Active Directory users with Multi-Factor Authentication](https://docs.microsoft.com/learn/modules/secure-aad-users-with-mfa/?WT.mc_id=udacity_learn-wwl)
+
 [Enable secure access to apps for external users with Azure AD B2C](https://docs.microsoft.com/learn/modules/enable-external-access-with-b2c/?WT.mc_id=udacity_learn-wwl)
+
 [Monitor and report on security events in Azure AD](https://docs.microsoft.com/learn/modules/monitor-report-aad-security-events/?WT.mc_id=udacity_learn-wwl)
 
 ## Exercise: Azure Active Directory
@@ -252,6 +254,38 @@ This is the same process as before, so we'll skip the video this time through.
 5. After you click "Register", copy down the "Application (client) ID", as you'll need that for the next exercise.
 6. Additionally, under "Manage", click "Certificates & secrets", then "+ New client secret", then enter a description (you can decide on your own desired expiration time). Copy down string under "Value", and make sure you store it somewhere safe.
 
+## OAuth2 with MSAL Part 1
+
+[![OAuth2 With MSAL](https://img.youtube.com/vi/DKbR5ACrXGw/0.jpg)](https://www.youtube.com/watch?v=DKbR5ACrXGw)
+
+**Authentication** is the process of checking if the user is who they say they are, and **authorization** is the process of checking if the user is allowed to access data and what they can do with the data.
+
+![Authentication vs Authorization](https://video.udacity-data.com/topher/2020/July/5f10b5e8_authentication-vs-authorization/authentication-vs-authorization.png)
+
+OAuth 2.0 is the industry-standard protocol for authorization. Instead of creating apps that each maintain their username and password information, apps can delegate that responsibility to a centralized identity provider.
+
+Azure AD is the centralized identity provider in the cloud that we’ll use to implement OAuth 2.0, or more specifically "Sign in with Microsoft", in our case. The Microsoft Authentication Library (MSAL) is a Python library we’ll use to implement “Sign in with Microsoft” functionality in an app. You may have also heard of or used Active Directory Authentication Library (ADAL) before; this is an older library that does not support personal Microsoft accounts.
+
+![The “Sign in with Microsoft” button uses MSAL under the hood in Python.](https://video.udacity-data.com/topher/2020/July/5f10b643_sign-in-with-ms/sign-in-with-ms.svg)
+
+### The MSAL Process
+
+[![MSAL Process Part 1](https://img.youtube.com/vi/oVsNS-xIXSQ/0.jpg)](https://www.youtube.com/watch?v=oVsNS-xIXSQ)
+
+In our simplified workflow, the authorization process with MSAL is as follows:
+
+* First, when the user clicks the “Sign in with Microsoft” button in your app, a function in your app will be activated, which will cause a browser pop-up. The user signing in will request an authorization code, from the /oauth/v2.0/authorize endpoint.
+* The OAuth2 provider, Microsoft in this case, will return an authorization code and will redirect the user based on a URL you have provided within your application’s Python code.
+* From here, your app will then need to request an access token. To do so, you’ll need the authorization code you received before, along with information like client ID and client secret, in the case of Azure Active Directory. It’s also likely you will be requesting a certain scope, such as USER.READ, which would allow you to read the user’s profile information (but not make changes to it). * This will hit the /oauth/v2.0/token endpoint.
+This will then return the access token for that user.
+* At this point, the access token itself is then used to actually hit some secure endpoint.
+* The endpoint must actually validate the token your app sent it, which is outside of your hands. It then will return the requested secure data, if the token is validated.
+
+You'd also need to provide the ability for users to logout.
+
+You can also find the complete workflow in [Microsoft's documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow).
+
+![A simplified workflow for OAuth 2.0 with MSAL](https://video.udacity-data.com/topher/2020/July/5f10b619_msal-oauth-process/msal-oauth-process.png)
 
 ## OAuth2 with MSAL Part 2
 
