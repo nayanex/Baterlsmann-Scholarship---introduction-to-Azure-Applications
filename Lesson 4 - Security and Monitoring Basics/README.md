@@ -107,9 +107,9 @@ You'll use the knowledge from each of these to answer the below quizzes.
 
 If you want, you can also dive a little deeper on the PaaS side of things with more specific articles around App Services, Azure SQL Database and Azure Storage with the below links, but they aren't required to answer the quiz questions.
 
-* (Deep Dive: App Service Best Practices)[https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-applications-using-app-services]
-* (Deep Dive: Azure SQL Database Best Practices)[https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-applications-using-sql]
-* (Deep Dive: Azure Storage)[https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-applications-using-storage]
+* [Deep Dive: App Service Best Practices](https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-applications-using-app-services)
+* [Deep Dive: Azure SQL Database Best Practices](https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-applications-using-sql)
+* [Deep Dive: Azure Storage](https://docs.microsoft.com/en-us/azure/security/fundamentals/paas-applications-using-storage)
 
 #### QUIZ QUESTION
 
@@ -274,9 +274,9 @@ Azure AD is the centralized identity provider in the cloud that we’ll use to i
 
 In our simplified workflow, the authorization process with MSAL is as follows:
 
-* First, when the user clicks the “Sign in with Microsoft” button in your app, a function in your app will be activated, which will cause a browser pop-up. The user signing in will request an authorization code, from the /oauth/v2.0/authorize endpoint.
+* First, when the user clicks the “Sign in with Microsoft” button in your app, a function in your app will be activated, which will cause a browser pop-up. The user signing in will request an authorization code, from the `/oauth/v2.0/authorize` endpoint.
 * The OAuth2 provider, Microsoft in this case, will return an authorization code and will redirect the user based on a URL you have provided within your application’s Python code.
-* From here, your app will then need to request an access token. To do so, you’ll need the authorization code you received before, along with information like client ID and client secret, in the case of Azure Active Directory. It’s also likely you will be requesting a certain scope, such as USER.READ, which would allow you to read the user’s profile information (but not make changes to it). * This will hit the /oauth/v2.0/token endpoint.
+* From here, your app will then need to request an access token. To do so, you’ll need the authorization code you received before, along with information like client ID and client secret, in the case of Azure Active Directory. It’s also likely you will be requesting a certain scope, such as `USER.READ`, which would allow you to read the user’s profile information (but not make changes to it). * This will hit the `/oauth/v2.0/token` endpoint.
 This will then return the access token for that user.
 * At this point, the access token itself is then used to actually hit some secure endpoint.
 * The endpoint must actually validate the token your app sent it, which is outside of your hands. It then will return the requested secure data, if the token is validated.
@@ -295,3 +295,93 @@ There are a few key parts to implement in your code when working with MSAL. Note
 
 
 [![MSAL Process Part 2](https://img.youtube.com/vi/7OS920xtw1A/0.jpg)](https://www.youtube.com/watch?v=7OS920xtw1A)
+
+#### Getting the Authorization Code
+
+You'll first need to create a `ConfidentialClientApplication`:
+
+* First create a `ConfidentialClientApplication` object. This class requires a Client ID and Client Secret from Azure AD.
+* It also requires an “authority” based on single or multi-tenant access.
+    * For example, https://login.microsoftonline.com/common is for multi-tenant access whereas single tenant access would replace /common with a tenant id
+* We can also pass in an optional argument for a cached session to avoid re-requesting information.
+
+Once the client is created, you'll use the `get_authorization_request_url` function of the client object. This requires:
+
+* A scope, such as `USER.READ`
+* State (UUID in our case, identifying the session)
+* Redirect URI
+
+Note that you can find more on the MSAL library code in the link further down the page as well.
+
+#### Getting the Access Token
+
+[![MSAL Process Part 1](https://img.youtube.com/vi/ctTVH1I2Z2A/0.png)](https://www.youtube.com/watch?v=ctTVH1I2Z2A)
+
+After re-creating the `ConfidentialClientApplication` object using the cache value, you then use the `acquire_token_by_authorization_code` method. This method requires:
+
+* An authorization code
+* A scope
+
+This method also takes other parameters, so this could be a good spot for adding in a `redirect_uri` to push a user to a particular endpoint.
+
+#### Logging Out
+
+It's also important to make sure your users can log out. This is actually a bit separate from the MSAL library itself, and is more concerned with a particular endpoint:
+
+```python
+return redirect(Config.AUTHORITY + '/oauth2/v2.0/logout' +
+    '?post_logout_redirect_uri=' +
+    url_for('login', _external=True))
+```
+
+I briefly mentioned the `/oauth2/v2.0/logout` endpoint earlier, and that’s what you can redirect to after the user clicks a sign out button. It will start with the authority they signed in with, such as `https://login.microsoftonline.com/common` for a multi-tenant app, the OAuth logout endpoint, as well as a post-logout redirect URI.
+
+Here, this assumes the app has some Flask endpoint for “login”, that is external to the original redirect URI (separate from Microsoft). You will also want to enter your redirect URI back in Azure AD, like you did with the redirect URIs for logging in.
+
+### Additional Resources - MSAL
+
+* [Python Documentation for Microsoft Authentication Library](https://msal-python.readthedocs.io/en/latest/)
+* [Microsoft Graph permissions levels](https://docs.microsoft.com/en-us/graph/permissions-reference) - such as `User.Read` that gives an app permission to read user profile data
+
+### QUESTION 1 OF 2
+
+Match the below security topics, resources and libraries to their related definition.
+
+DEFINITION | AREA OF AUTHENTICATION/AUTHORIZATION
+-----------|-------------------------------------
+Azure option for providing single sign-on and multi-factor authentication capabilities. | `Azure Active Directory`
+
+A form of authentication that, instead of giving usernames and passwords to an app, instead handles tokens allowing apps to access certain portions of the user's account. | `OAuth2`
+
+The library developers can work with to add functionality around token grants for secure API access. | `MSAL`
+
+Whether a user is who they say they are | `Authentication`
+
+Whether a user is allowed to access something | `Authorization`
+
+### QUESTION 2 OF 2
+
+You've built an app that utilizes the `msal` library for authentication purposes. The app and its related login/logout flow work fine when running on localhost, but when you deploy the app, the app loads but authentication doesn't work appropriately. What step might you have skipped with the live application?
+
+[x] The live app's redirect URI needs to be added in Azure AD
+
+[ ] The app needs to be registered in Azure AD
+
+[ ] You have the wrong account types allowed in Azure AD
+
+[ ] None of the above
+
+### Microsoft Learn Resources - Authentication
+
+While KeyVault API, Managed Identities, Shared Access Signatures, and Role-Based Access Controls (RBAC) are outside the scope of this course, we encourage you to check them out below, especially if you plan to take Microsoft's [AZ-204](https://docs.microsoft.com/en-us/learn/certifications/exams/az-204) exam on Developing Solutions for Microsoft Azure.
+
+* [Secure app configuration data by using the App Configuration and KeyVault API](https://docs.microsoft.com/en-us/learn/modules/configure-and-manage-azure-key-vault/)
+* [Manage keys, secrets, and certificates by using the KeyVault API (same content as above)](https://docs.microsoft.com/en-us/learn/modules/configure-and-manage-azure-key-vault/)
+* [Implement Managed Identities for Azure resources](https://docs.microsoft.com/en-us/learn/modules/authenticate-apps-with-managed-identities/)
+* [Create and implement shared access signatures](https://docs.microsoft.com/en-us/learn/modules/control-access-to-azure-storage-with-sas/)
+* [Control access to resources by using role-based access controls (RBAC)](https://docs.microsoft.com/en-us/learn/modules/secure-azure-resources-with-rbac/)
+
+
+
+
+
