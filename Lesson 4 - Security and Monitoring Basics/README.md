@@ -661,7 +661,7 @@ az webapp up \
 
 ## Lesson Conclusion
 
-[![Solution - Monitoring And Logging In Azure Part 4](https://img.youtube.com/vi/OFktPYQMz0A/0.jpg)](https://www.youtube.com/watch?v=OFktPYQMz0A)
+[![Lesson Conclusion](https://img.youtube.com/vi/OFktPYQMz0A/0.jpg)](https://www.youtube.com/watch?v=OFktPYQMz0A)
 
 In this lesson, you:
 
@@ -669,3 +669,24 @@ In this lesson, you:
 * Discovered the various security options available in Azure
 * Got hands-on with Azure Active Directory, OAuth 2.0, and the Microsoft Authentication Library (MSAL)
 Added monitoring and logging into your Azure applications, including storing logs and activating alerts
+
+
+## Glossary
+
+Key Term	| Definition
+------------|------------
+Azure Active Directory | Provides single sign-on and multi-factor authentication capabilities, such as Sign in with Microsoft.
+Tenant | Typically equivalent to an organization in Azure AD, although you can set up additional tenants as necessary.
+OAuth2 | The industry-standard protocol for authorization. Instead of creating apps that each maintain their username and password information, apps can delegate that responsibility to a centralized identity provider.
+Microsoft Authentication Library | A Python library used in conjunction with Azure AD to utilize Microsoft single sign-on capabilities in Python apps. Abbreviated as "MSAL".
+App Configuration | Stores application settings in one secure location.
+KeyVault API | Stores application keys and secrets in one secure location.
+Managed Identities | A part of Azure Active Directory; this helps streamline providing an app or app user access to other Azure resources.
+Shared Access Signatures | Give external parties certain limited access (determined by you) to different Azure resources.
+Role-Based Access Controls (RBAC) | Help internally manage who has access to what resources, and what they can do to said resources.
+Transient Faults | The loss of network connectivity, service unavailability, or other timeouts; your cloud applications should appropriately handle these.
+Azure Monitor | Provides a wide range of monitoring services such as log analytics, metrics, alerts, and much more.
+Application Insights | Part of Azure Monitor; This helps monitor performance and other key metrics.
+Authentication | The process of checking if the user is who they say they are.
+Authorization | The process of checking if the user is allowed to access data, and what they can do with that data.
+
