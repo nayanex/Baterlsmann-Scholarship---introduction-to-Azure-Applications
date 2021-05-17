@@ -205,7 +205,7 @@ This is a bit of a tough one - it's important to remember that in real-life situ
 
 Some key points that stood out to me were:
 
-* *he confidence level of this application being a massive success seems low (do we want to assume we'll need a lot of scaling?)
+* The confidence level of this application being a massive success seems low (do we want to assume we'll need a lot of scaling?)
 * The application currently utilizes ~5 GB on 2 CPUs during stress testing
 * The potential the app will grow in resource needs
 
