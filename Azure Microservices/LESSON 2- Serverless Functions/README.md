@@ -1,22 +1,5 @@
 # Lesson 2
 
-## Course Outline
-
-```
-az functionapp create \
---resource-group "azure-functions-udacity" \
---name "function-app-demo-nayanexx" \
---storage-account "udacity0function0demo" \
---os-type Linux \
---consumption-plan-location "westeurope" \
---runtime python
-```
-
-[Azure CLI Documentation - az functionapp](https://docs.microsoft.com/en-us/cli/azure/functionapp?view=azure-cli-latest#az_functionapp_create)
-
-
-`az account list-locations --output=table`
-
 ## Pipenv
 
 First, let’s install it:
@@ -184,11 +167,11 @@ It’s worth noting again that you should never change this file by hand. It is 
 
 Check for security vulnerabilities (and PEP 508 requirements) in your environment:
 
-`pipenv check``
+`pipenv check`
 
 Now, let’s say you no longer need a package. You can uninstall it:
 
-`pipenv uninstall numpy``
+`pipenv uninstall numpy`
 
 Additionally, let’s say you want to completely wipe all the installed packages from your virtual environment:
 
@@ -211,8 +194,6 @@ How to find out where your project home is:
 
 `pipenv --where`
 
-
-
 ### Other Resources/Documentation about Pipenv <3
 
 [Pipenv Docs](https://docs.pipenv.org/)
@@ -223,3 +204,226 @@ How to find out where your project home is:
 [Configure Pipenv in PyCharm](https://www.jetbrains.com/help/pycharm/pipenv.html)
 [Real Python - Pipenv Guide](https://realpython.com/pipenv-guide/)
 [Managing Application Dependencies](https://packaging.python.org/tutorials/managing-dependencies/#managing-dependencies)
+
+
+## Course Outline
+
+## Exercise: Create Our First Azure Functions
+
+1. On your machine, use the below command to create a new function. Call the function app name a variation of "MyTestAPI", perhaps with some numbers added to the end so you have a custom app name.
+
+* Replace the resource group and storage account variable with your own variable. For region, select US West or US East. Other regions might not fully support the Python language yet, so only select one of these two. If you don't know your storage account name, go to your resource group in the portal and it will list it for you.
+
+```
+az functionapp create \
+--resource-group "azure-functions-rg" \
+--name "function-app-demo" \
+--storage-account "storage4appfunction" \
+--os-type Linux \
+--consumption-plan-location "westeurope" \
+--runtime python
+```
+
+2. Now create your HTTP Function:
+
+```
+func new --language python --name MyHTTPFunction
+```
+
+
+`az account list-locations --output=table`
+
+
+
+[Azure CLI Documentation - az functionapp](https://docs.microsoft.com/en-us/cli/azure/functionapp?view=azure-cli-latest#az_functionapp_create)
+
+## Exercise: Create Our First Azure Function
+
+### Azure Function Core Tools
+
+[Work with Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=macos%2Ccsharp%2Cbash#install-the-azure-functions-core-tools)
+
+You can opt-out of telemetry by setting the `FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT` environment variable to '1' or 'true' using your favorite shell.
+
+## CosmosDB and Connecting to Azure Functions
+
+### Setting Up CosmosDB
+
+#### 1. Create a new CosmosDB account.
+
+Replace the resource group, region (make sure you read the disclaimer note below), and storage account with your own. If you don't know your resource group name and storage account name, visit the portal to retrieve them.
+
+```
+RESOURCE_GROUP="azure-functions-rg"
+REGION="westeurope"
+
+# This is the new account here
+COSMOSDB_ACCOUNT="cosmos4ccount4function4pp"
+
+az cosmosdb create -n $COSMOSDB_ACCOUNT -g $RESOURCE_GROUP  \
+--locations regionName=$REGION failoverPriority=0 isZoneRedundant=False \
+--kind "MongoDB"
+```
+
+**Note:** It may take a while for the CosmosDB account to be created, sometimes on the order of 10-20 minutes.
+
+##### `az cosmosdb create` Documentation
+
+**[Azure CLI](https://docs.microsoft.com/en-us/cli/azure/cosmosdb?view=azure-cli-latest#az_cosmosdb_create)**
+```
+az cosmosdb create --name
+                   --resource-group
+                   [--assign-identity]
+                   [--backup-interval]
+                   [--backup-retention]
+                   [--capabilities]
+                   [--default-consistency-level {BoundedStaleness, ConsistentPrefix, Eventual, Session, Strong}]
+                   [--default-identity]
+                   [--disable-key-based-metadata-write-access {false, true}]
+                   [--enable-analytical-storage {false, true}]
+                   [--enable-automatic-failover {false, true}]
+                   [--enable-free-tier {false, true}]
+                   [--enable-multiple-write-locations {false, true}]
+                   [--enable-public-network {false, true}]
+                   [--enable-virtual-network {false, true}]
+                   [--ip-range-filter]
+                   [--key-uri]
+                   [--kind {GlobalDocumentDB, MongoDB, Parse}]
+                   [--locations]
+                   [--max-interval]
+                   [--max-staleness-prefix]
+                   [--network-acl-bypass {AzureServices, None}]
+                   [--network-acl-bypass-resource-ids]
+                   [--server-version {3.2, 3.6, 4.0}]
+                   [--subscription]
+                   [--tags]
+                   [--virtual-network-rules]
+```
+
+#### 2. Creating a new MongoDB database with a sample collection
+
+```
+COSMOSDB_ACCOUNT="cosmos4ccount4function4pp"
+RESOURCE_GROUP="azure-functions-rg"
+DB_NAME="azure-func-db"
+CREATE_LEASE_COLLECTION=0     # yes,no=(1,0)
+
+
+SAMPLE_COLLECTION="cars"
+
+# Get your CosmosDB key and save as a variable
+COSMOSDB_KEY=$(az cosmosdb keys list --name $COSMOSDB_ACCOUNT --resource-group $RESOURCE_GROUP --output tsv |awk '{print $1}')
+
+az cosmosdb database create \
+    --name $COSMOSDB_ACCOUNT \
+    --db-name $DB_NAME \
+    --key $COSMOSDB_KEY \
+    --resource-group $RESOURCE_GROUP
+    
+
+# Create a container with a partition key and provision 400 RU/s throughput.
+az cosmosdb mongodb collection create \
+    --resource-group $RESOURCE_GROUP \
+    --name $SAMPLE_COLLECTION \
+    --account-name $COSMOSDB_ACCOUNT \
+    --database-name $DB_NAME \
+    --throughput 400
+```
+
+##### `az cosmosdb database create`Documentation
+
+[Creates an Azure Cosmos DB database](https://docs.microsoft.com/en-us/cli/azure/cosmosdb/database?view=azure-cli-latest#az_cosmosdb_database_create).
+
+```
+az cosmosdb database create --db-name
+                            [--key]
+                            [--name]
+                            [--resource-group-name]
+                            [--subscription]
+                            [--throughput]
+                            [--url-connection]
+```
+
+Example:
+
+```
+az cosmosdb database create --name MyCosmosDBDatabaseAccount --resource-group MyResourceGroup --db-name MyDatabase
+```
+
+##### az cosmosdb mongodb collection create
+
+[Create a MongoDB collection under an Azure Cosmos DB MongoDB database.](https://docs.microsoft.com/en-us/cli/azure/cosmosdb/mongodb/collection?view=azure-cli-latest#az_cosmosdb_mongodb_collection_create)
+
+```
+az cosmosdb mongodb collection create --account-name
+                                      --database-name
+                                      --name
+                                      --resource-group
+                                      [--analytical-storage-ttl]
+                                      [--idx]
+                                      [--max-throughput]
+                                      [--shard]
+                                      [--subscription]
+                                      [--throughput]
+```
+
+#### 3. Importing An Existing Database Collection
+
+##### Download dependencies For Mac users:
+
+[Install MongoDB Community Edition on macOS](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/#std-label-brew-installs-dbtools)
+
+```
+brew install mongodb-community@4.2
+
+# check if mongoimport lib exists
+mongoimport --version
+```
+
+##### For Windows users
+
+Download MongoDB first [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/).
+
+If you run into issues with mongoimport, see [here](https://stackoverflow.com/questions/31055637/getting-mongoimport-is-not-recognized-as-an-internal-or-external-command-ope).
+
+##### For all
+
+Suppose you have a `sample_cars_collection.json` file that you need to import into an existing collection called `cars`:
+
+```
+# This information is viewable in your portal >> Azure Cosmos DB >> Select the DB name >> Settings >> Connection String >>
+# replace the host, port, username, and primary password with your own
+
+MONGODB_HOST="c05m05account5functi0ns4pp.mongo.cosmos.azure.com"
+MONGODB_PORT="10255"
+USER="c05m05account5functi0ns4pp"
+
+# Copy/past the primary password here
+PRIMARY_PW="1DCiOsV8nFFFQZCyH5zCFTB0Jxi5mqf3OuX82LjVIGpot0m53JWagdwIIUVk6V7M4ot0Fs6V6X9KiEvPkOvOww=="
+
+
+DB_NAME="azure-func-db"
+COLLECTION_CARS="cars"
+```
+
+Import command for Linux and Mac OS
+
+```
+mongoimport -h $MONGODB_HOST:$MONGODB_PORT \
+-d $DB_NAME -c $COLLECTION_CARS -u $USER -p $PRIMARY_PW \
+--ssl  --jsonArray  --file sample_cars_collection.json --writeConcern "{w:0}"
+```
+
+[Write Concern Documentation](https://docs.mongodb.com/v4.2/reference/write-concern/)
+
+Import command for Windows on Powershell
+
+```
+C:\path\to\your\mongodb\bin\mongoimport –h $MONGODB_HOST:$MONGODB_PORT |
+ –u $USERNAME  –p $PRIMARY_PW |
+ –d $DB_NAME  –c $COLLECTION_CARS |
+ ––file 'sample_cars_collection.json'   ––type json
+```
+
+
+
