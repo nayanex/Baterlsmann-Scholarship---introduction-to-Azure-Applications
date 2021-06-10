@@ -592,6 +592,7 @@ az webapp up \
  --resource-group resource-group-west \
  --name hello-world1234 \
  --sku F1 \
+ --location westeurope \
  --verbose
  ```
 
@@ -601,7 +602,7 @@ az webapp up \
 ```bash
 az webapp up \
  --name hello-world1234 \
- --verbose
+ --verbose 
 ```
 
 Alternatively, you can create the initial web app from the Portal.
